@@ -33,10 +33,10 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
   styleUrls: ['../../../styles/nicematic-picker.css'],
   template: `
     <div
-      class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none"
+      class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none w-full"
       style="user-select: none; -webkit-user-select: none; -webkit-user-drag: none;"
       (dragstart)="$event.preventDefault()"
-      [style.width.px]="config().pickerWidth"
+      [style.max-width.px]="config().pickerWidth"
       [style.max-height.px]="config().pickerHeight"
     >
       <!-- Category tabs TOP (like WhatsApp) -->
