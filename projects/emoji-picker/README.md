@@ -2,6 +2,8 @@
 
 A high-performance emoji picker for Angular. Zero external dependencies. Native scroll. Auto theme detection.
 
+**[Live Demo](https://myposty.github.io/nicematic-emoji-picker/)**
+
 ## Features
 
 - **929 emojis** across 9 categories (smileys, people, animals, food, travel, activities, objects, symbols, flags)
