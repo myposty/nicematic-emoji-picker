@@ -49,22 +49,14 @@
     </div>
 
     <!-- Locale toggle -->
-    <div class="flex justify-center gap-2 mb-3">
-      <button
-        class="px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer"
-        [class]="currentLocale() === 'es' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
-        (click)="currentLocale.set('es')"
-      >ES</button>
-      <button
-        class="px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer"
-        [class]="currentLocale() === 'en' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
-        (click)="currentLocale.set('en')"
-      >EN</button>
-      <button
-        class="px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer"
-        [class]="currentLocale() === 'pt' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
-        (click)="currentLocale.set('pt')"
-      >PT</button>
+    <div class="flex justify-center flex-wrap gap-1.5 mb-3">
+      @for (loc of locales; track loc) {
+        <button
+          class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer uppercase"
+          [class]="currentLocale() === loc ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
+          (click)="currentLocale.set(loc)"
+        >{{ loc }}</button>
+      }
     </div>
 
     <!-- Picker -->

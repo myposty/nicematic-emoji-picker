@@ -15,8 +15,10 @@ import {
   Emoji,
   EmojiCategory,
   EmojiLocale,
+  LocaleStrings,
   CategoryMeta,
   getCategories,
+  getLocaleStrings,
   EmojiPickerConfig,
   DEFAULT_CONFIG,
 } from '../../models/emoji.model';
@@ -60,7 +62,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
 
       <!-- Search -->
       @if (config().showSearch) {
-        <nicematic-search-bar (searchChange)="onSearch($event)" />
+        <nicematic-search-bar [placeholder]="localeStrings().search" (searchChange)="onSearch($event)" />
       }
 
       <!-- Grid -->
@@ -68,6 +70,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
         <nicematic-grid
           [emojis]="displayedEmojis()"
           [categories]="visibleCategories()"
+          [noResultsText]="localeStrings().noResults"
           [skinTone]="skinToneService.currentSkinTone()"
           [columns]="effectiveColumns()"
           [cellSize]="effectiveCellSize()"
@@ -149,6 +152,10 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
     const cell = this.effectiveCellSize();
     const padding = 16;
     return Math.max(5, Math.floor((w - padding) / cell));
+  });
+
+  readonly localeStrings = computed<LocaleStrings>(() => {
+    return getLocaleStrings((this.config().locale || 'es') as EmojiLocale);
   });
 
   readonly config = computed<EmojiPickerConfig>(() => ({

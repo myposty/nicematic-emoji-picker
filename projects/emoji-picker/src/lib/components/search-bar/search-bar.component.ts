@@ -1,6 +1,7 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  input,
   output,
   signal,
   OnDestroy,
@@ -21,7 +22,7 @@ import {
         <input
           #searchInput
           type="text"
-          placeholder="Buscar emoji"
+          [placeholder]="placeholder()"
           class="w-full pl-10 pr-9 py-2 text-[13px] rounded-full outline-none transition-all duration-200"
           style="background:var(--nme-input-bg);color:var(--nme-text);border:1px solid var(--nme-input-border);"
           [value]="query()"
@@ -46,6 +47,7 @@ import {
   `,
 })
 export class SearchBarComponent implements OnDestroy {
+  readonly placeholder = input<string>('Buscar emoji');
   readonly query = signal('');
   readonly searchChange = output<string>();
 

@@ -36,7 +36,7 @@ interface CategoryGroup {
       @if (isSearchMode() && emojis().length === 0) {
         <div class="flex flex-col items-center justify-center gap-2" style="color:var(--nme-text-muted);" [style.height.px]="height()">
           <span class="text-4xl">😕</span>
-          <span class="text-sm">No se encontraron emojis</span>
+          <span class="text-sm">{{ noResultsText() }}</span>
         </div>
       } @else if (isSearchMode()) {
         <div class="flex flex-wrap px-2 py-1">
@@ -90,6 +90,7 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
   readonly skinTone = input<SkinTone>('');
   readonly columns = input<number>(9);
   readonly cellSize = input<number>(44);
+  readonly noResultsText = input<string>('No se encontraron emojis');
   readonly height = input<number>(300);
   readonly contentHeight = input<number>(0);
   readonly isSearchMode = input<boolean>(false);

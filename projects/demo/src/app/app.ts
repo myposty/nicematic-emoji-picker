@@ -11,7 +11,8 @@ export class App {
   selectedEmoji = signal<Emoji | null>(null);
   message = signal('');
   showPicker = signal(true);
-  currentLocale = signal<'es' | 'en' | 'pt'>('es');
+  currentLocale = signal<string>('es');
+  locales = ['es','en','pt','fr','de','it','ja','ko','zh','ru','ar','hi'];
   copied = signal(false);
 
   installCmd = 'npm install @nicematic/emoji-picker';
@@ -61,9 +62,4 @@ export class App {
     setTimeout(() => this.copied.set(false), 2000);
   }
 
-  cycleLocale(): void {
-    const locales: ('es' | 'en' | 'pt')[] = ['es', 'en', 'pt'];
-    const idx = locales.indexOf(this.currentLocale());
-    this.currentLocale.set(locales[(idx + 1) % locales.length]);
-  }
 }
