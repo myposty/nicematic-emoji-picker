@@ -1,59 +1,102 @@
-# NgEmojiWorkspace
+# @nicematic/emoji-picker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.1.
+A high-performance emoji picker for Angular. Zero external dependencies. Virtual scroll. Tailwind v4.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **738 emojis** across 9 categories (smileys, people, animals, food, travel, activities, objects, symbols, flags)
+- **Virtual scroll** — only renders visible rows, handles 700+ emojis smoothly
+- **Bilingual search** — English and Spanish keywords built-in
+- **Skin tone variants** — long press on any supported emoji to choose skin tone
+- **Smart recents** — frequency-weighted recency algorithm (like WhatsApp)
+- **Flag rendering** — Twemoji fallback for country flags on Windows
+- **Zero dependencies** — no CDK, no external libraries, just Angular
+- **Angular Signals** — fully reactive with `signal()`, `computed()`, OnPush
+- **Standalone components** — tree-shakable, no NgModule needed
+- **Tailwind v4** — dark UI out of the box
+- **Dynamic height** — picker adjusts automatically based on content
 
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Installation
 
 ```bash
-ng generate --help
+npm install @nicematic/emoji-picker
 ```
 
-## Building
+## Usage
 
-To build the project run:
+```typescript
+import { EmojiPickerComponent, Emoji } from '@nicematic/emoji-picker';
 
-```bash
-ng build
+@Component({
+  selector: 'app-root',
+  imports: [EmojiPickerComponent],
+  template: `
+    <nme-emoji-picker (emojiSelect)="onSelect($event)" />
+  `,
+})
+export class App {
+  onSelect(emoji: Emoji) {
+    console.log(emoji.char); // 😀
+  }
+}
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Configuration
 
-## Running unit tests
+All inputs are optional. Defaults work out of the box.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```html
+<nme-emoji-picker
+  [columns]="9"
+  [cellSize]="44"
+  [pickerHeight]="400"
+  [pickerWidth]="420"
+  [showSearch]="true"
+  [showCategories]="true"
+  (emojiSelect)="onSelect($event)"
+/>
 ```
 
-## Running end-to-end tests
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `columns` | `number` | `9` | Number of columns in the grid |
+| `cellSize` | `number` | `44` | Size of each emoji cell in px |
+| `pickerHeight` | `number` | `400` | Max height of the picker in px |
+| `pickerWidth` | `number` | `420` | Width of the picker in px |
+| `showSearch` | `boolean` | `true` | Show/hide search bar |
+| `showCategories` | `boolean` | `true` | Show/hide category tabs |
+| `maxRecents` | `number` | `50` | Max recent emojis stored |
 
-For end-to-end (e2e) testing, run:
+| Output | Type | Description |
+|--------|------|-------------|
+| `emojiSelect` | `Emoji` | Emitted when an emoji is clicked |
 
-```bash
-ng e2e
+## Tailwind v4 Setup
+
+The picker uses Tailwind classes. Add the source path in your `styles.css`:
+
+```css
+@import "tailwindcss";
+@source "../node_modules/@nicematic/emoji-picker/**/*.ts";
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Emoji Interface
 
-## Additional Resources
+```typescript
+interface Emoji {
+  char: string;        // Unicode character
+  name: string;        // English name
+  keywords: string[];  // Search keywords
+  category: EmojiCategory;
+  hasSkinTone: boolean;
+}
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Requirements
+
+- Angular 20+
+- Tailwind CSS v4
+
+## License
+
+MIT
