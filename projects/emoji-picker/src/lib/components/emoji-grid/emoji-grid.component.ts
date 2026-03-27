@@ -23,7 +23,7 @@ interface GridRow {
 }
 
 @Component({
-  selector: 'nme-emoji-grid',
+  selector: 'nicematic-grid',
   standalone: true,
   imports: [EmojiCellComponent, SkinTonePopoverComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,7 +55,7 @@ interface GridRow {
           } @else {
             <div class="flex px-2" [style.height.px]="cellSize()">
               @for (emoji of row.emojis; track emoji.char; let i = $index) {
-                <nme-emoji-cell
+                <nicematic-cell
                   [emoji]="emoji"
                   [displayChar]="row.displayChars![i]"
                   [size]="cellSize()"
@@ -70,7 +70,7 @@ interface GridRow {
 
       <!-- Skin tone popover -->
       @if (skinToneEmoji()) {
-        <nme-skin-tone-popover
+        <nicematic-skin-tone-popover
           [emoji]="skinToneEmoji()!"
           [x]="popoverX()"
           [y]="popoverY()"

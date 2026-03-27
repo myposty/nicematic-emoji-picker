@@ -24,7 +24,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
 
 @Component({
-  selector: 'nme-emoji-picker',
+  selector: 'nicematic-picker',
   standalone: true,
   imports: [CategoryBarComponent, SearchBarComponent, EmojiGridComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,7 +38,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
     >
       <!-- Category tabs TOP (like WhatsApp) -->
       @if (config().showCategories && !isSearching()) {
-        <nme-category-bar
+        <nicematic-category-bar
           [categories]="visibleCategories()"
           [activeCategory]="activeCategory()"
           (categorySelect)="onCategorySelect($event)"
@@ -47,12 +47,12 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
 
       <!-- Search -->
       @if (config().showSearch) {
-        <nme-search-bar (searchChange)="onSearch($event)" />
+        <nicematic-search-bar (searchChange)="onSearch($event)" />
       }
 
       <!-- Grid -->
       <div class="flex-1 min-h-0 overflow-hidden">
-        <nme-emoji-grid
+        <nicematic-grid
           [emojis]="displayedEmojis()"
           [categories]="visibleCategories()"
           [skinTone]="skinToneService.currentSkinTone()"

@@ -31,7 +31,7 @@ import { EmojiPickerComponent, Emoji } from '@nicematic/emoji-picker';
   selector: 'app-root',
   imports: [EmojiPickerComponent],
   template: `
-    <nme-emoji-picker (emojiSelect)="onSelect($event)" />
+    <nicematic-picker (emojiSelect)="onSelect($event)" />
   `,
 })
 export class App {
@@ -46,7 +46,7 @@ export class App {
 All inputs are optional. Defaults work out of the box.
 
 ```html
-<nme-emoji-picker
+<nicematic-picker
   [columns]="9"
   [cellSize]="44"
   [pickerHeight]="400"

@@ -11,7 +11,7 @@ import { Emoji, SkinTone, SKIN_TONES } from '../../models/emoji.model';
 import { EmojiDataService } from '../../services/emoji-data.service';
 
 @Component({
-  selector: 'nme-skin-tone-popover',
+  selector: 'nicematic-skin-tone-popover',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

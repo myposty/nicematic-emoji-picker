@@ -7,7 +7,7 @@ import {
 import { CategoryMeta, EmojiCategory } from '../../models/emoji.model';
 
 @Component({
-  selector: 'nme-category-bar',
+  selector: 'nicematic-category-bar',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

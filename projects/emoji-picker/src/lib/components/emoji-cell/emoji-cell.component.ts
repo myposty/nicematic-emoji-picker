@@ -11,7 +11,7 @@ import {
 import { Emoji } from '../../models/emoji.model';
 
 @Component({
-  selector: 'nme-emoji-cell',
+  selector: 'nicematic-cell',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

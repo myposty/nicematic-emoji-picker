@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'nme-search-bar',
+  selector: 'nicematic-search-bar',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `

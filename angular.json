@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/emoji-picker",
       "sourceRoot": "projects/emoji-picker/src",
-      "prefix": "nme",
+      "prefix": "nicematic",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",

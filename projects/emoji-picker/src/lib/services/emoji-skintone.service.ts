@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { SkinTone } from '../models/emoji.model';
 
-const STORAGE_KEY = 'nme-skintone';
+const STORAGE_KEY = 'nicematic-skintone';
 const VALID_TONES: SkinTone[] = ['', '\u{1F3FB}', '\u{1F3FC}', '\u{1F3FD}', '\u{1F3FE}', '\u{1F3FF}'];
 
 @Injectable({ providedIn: 'root' })
