@@ -11,11 +11,11 @@ import { CategoryMeta, EmojiCategory } from '../../models/emoji.model';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nav class="flex items-center justify-around px-1 h-[46px] border-b border-white/5 bg-[#1a1a28]">
+    <nav class="flex items-center h-[46px] border-b border-white/5 bg-[#1a1a28]" style="flex-shrink:0;">
       @for (cat of categories(); track cat.id) {
         <button
           type="button"
-          class="relative flex items-center justify-center w-10 h-10 rounded-xl text-[20px] cursor-pointer transition-all duration-200 grayscale"
+          class="relative flex-1 flex items-center justify-center h-10 min-w-0 rounded-xl text-[20px] cursor-pointer transition-all duration-200 grayscale"
           [class]="activeCategory() === cat.id
             ? '!grayscale-0 opacity-100'
             : 'opacity-40 hover:opacity-70 hover:grayscale-0'"

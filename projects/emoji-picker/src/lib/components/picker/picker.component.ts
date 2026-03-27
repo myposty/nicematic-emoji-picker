@@ -34,14 +34,17 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['../../../styles/nicematic-picker.css'],
+  host: {
+    'style': 'display:block;width:100%;box-sizing:border-box;',
+  },
   template: `
     <div
       #pickerContainer
-      class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none w-full"
-      style="user-select: none; -webkit-user-select: none; -webkit-user-drag: none;"
-      (dragstart)="$event.preventDefault()"
+      class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none"
+      style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;"
       [style.max-width.px]="config().pickerWidth"
-      [style.max-height.px]="config().pickerHeight"
+      [style.height.px]="config().pickerHeight"
+      (dragstart)="$event.preventDefault()"
     >
       <!-- Category tabs TOP (like WhatsApp) -->
       @if (config().showCategories && !isSearching()) {
@@ -64,7 +67,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
           [categories]="visibleCategories()"
           [skinTone]="skinToneService.currentSkinTone()"
           [columns]="effectiveColumns()"
-          [cellSize]="config().cellSize"
+          [cellSize]="effectiveCellSize()"
           [height]="gridHeight()"
           [contentHeight]="contentHeight()"
           [isSearchMode]="isSearching()"
@@ -119,12 +122,16 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
     this.resizeObserver?.disconnect();
   }
 
+  readonly effectiveCellSize = computed(() => {
+    return this.config().cellSize;
+  });
+
   readonly effectiveColumns = computed(() => {
     if (this.columns() !== undefined) return this.columns()!;
     const w = this.containerWidth();
-    const cell = this.config().cellSize;
+    const cell = this.effectiveCellSize();
     const padding = 16;
-    return Math.max(4, Math.floor((w - padding) / cell));
+    return Math.max(5, Math.floor((w - padding) / cell));
   });
 
   readonly config = computed<EmojiPickerConfig>(() => ({
@@ -184,7 +191,7 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
   readonly contentHeight = computed(() => {
     const emojis = this.displayedEmojis();
     const cols = this.effectiveColumns();
-    const cellSize = this.config().cellSize;
+    const cellSize = this.effectiveCellSize();
     const headerHeight = 32;
 
     if (this.isSearching()) {

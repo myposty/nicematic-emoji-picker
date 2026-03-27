@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-gray-950 flex flex-col items-center justify-center gap-6 p-8">
-  <h1 class="text-3xl font-bold text-white">&#64;nicematic/emoji-picker</h1>
+<div class="min-h-screen bg-gray-950 flex flex-col items-center justify-center gap-6 p-4 sm:p-8 box-border overflow-hidden">
+  <h1 class="text-2xl sm:text-3xl font-bold text-white text-center">&#64;nicematic/emoji-picker</h1>
 
-  <div class="flex items-center gap-2 w-full max-w-md">
-    <div class="flex-1 bg-gray-800 rounded-xl px-4 py-3 text-white text-lg min-h-12 flex items-center flex-wrap gap-0.5">
+  <div class="flex items-center gap-2 w-full max-w-md px-2">
+    <div class="flex-1 bg-gray-800 rounded-xl px-4 py-3 text-white text-lg min-h-12 flex items-center flex-wrap gap-0.5 overflow-hidden">
       {{ message() || 'Click an emoji...' }}
     </div>
     @if (message()) {
@@ -16,7 +16,9 @@
     }
   </div>
 
-  <nicematic-picker (emojiSelect)="onEmojiSelect($event)" />
+  <div class="w-full max-w-md px-2 box-border">
+    <nicematic-picker (emojiSelect)="onEmojiSelect($event)" />
+  </div>
 
   @if (selectedEmoji()) {
     <div class="text-gray-400 text-sm">
