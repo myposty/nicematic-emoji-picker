@@ -159,12 +159,13 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
 
   onLongPress(emoji: Emoji, rect: DOMRect): void {
     this.skinToneEmoji.set(emoji);
-    const container = this.scrollContainerRef.nativeElement;
-    const containerRect = container.getBoundingClientRect();
     const popoverWidth = 276;
-    const cx = rect.left - containerRect.left + rect.width / 2;
-    this.popoverX.set(Math.max(8, Math.min(cx - popoverWidth / 2, container.clientWidth - popoverWidth - 8)));
-    this.popoverY.set(Math.max(0, rect.top - containerRect.top + container.scrollTop - 52));
+    const popoverHeight = 52;
+    const cx = rect.left + rect.width / 2;
+    const x = Math.max(4, Math.min(cx - popoverWidth / 2, window.innerWidth - popoverWidth - 4));
+    const y = rect.top - popoverHeight - 8;
+    this.popoverX.set(x);
+    this.popoverY.set(Math.max(4, y));
   }
 
   onToneSelected(tone: SkinTone): void {
