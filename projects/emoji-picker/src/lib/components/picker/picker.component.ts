@@ -14,8 +14,9 @@ import {
 import {
   Emoji,
   EmojiCategory,
+  EmojiLocale,
   CategoryMeta,
-  CATEGORIES,
+  getCategories,
   EmojiPickerConfig,
   DEFAULT_CONFIG,
 } from '../../models/emoji.model';
@@ -42,8 +43,8 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
   template: `
     <div
       #pickerContainer
-      class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none animate-[nicematic-fade-in_0.15s_ease-out]"
-      style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;"
+      class="flex flex-col rounded-2xl shadow-2xl overflow-hidden select-none animate-[nicematic-fade-in_0.15s_ease-out]"
+      style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;background:var(--nme-bg,#222230);color:var(--nme-text,#e5e7eb);border-radius:var(--nme-radius,16px);"
       [style.max-width.px]="config().pickerWidth"
       [style.height.px]="config().pickerHeight"
       (dragstart)="$event.preventDefault()"
@@ -166,10 +167,14 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
 
   readonly isSearching = computed(() => this.searchQuery().length > 0);
 
+  readonly localizedCategories = computed(() => {
+    return getCategories((this.config().locale || 'es') as EmojiLocale);
+  });
+
   readonly visibleCategories = computed<CategoryMeta[]>(() => {
     const include = this.config().includeCategories;
     const hasRecents = this.recentsService.recents().length > 0;
-    return CATEGORIES.filter(c => {
+    return this.localizedCategories().filter(c => {
       if (c.id === 'recent' && !hasRecents) return false;
       if (include.length > 0 && !include.includes(c.id)) return false;
       return true;

@@ -6,3 +6,33 @@
   from { opacity: 0; transform: scale(0.95) translateY(8px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
+
+nicematic-picker {
+  --nme-bg: #222230;
+  --nme-nav-bg: #1a1a28;
+  --nme-text: #e5e7eb;
+  --nme-text-muted: #9ca3af;
+  --nme-border: rgba(255,255,255,0.05);
+  --nme-hover: rgba(255,255,255,0.1);
+  --nme-input-bg: rgba(255,255,255,0.05);
+  --nme-input-border: rgba(255,255,255,0.1);
+  --nme-accent: #3b82f6;
+  --nme-radius: 16px;
+}
+
+.nme-cell:hover { background: var(--nme-hover); }
+
+@media (prefers-color-scheme: light) {
+  nicematic-picker {
+    --nme-bg: #ffffff;
+    --nme-nav-bg: #f9fafb;
+    --nme-text: #1f2937;
+    --nme-text-muted: #6b7280;
+    --nme-border: rgba(0,0,0,0.08);
+    --nme-hover: rgba(0,0,0,0.06);
+    --nme-input-bg: rgba(0,0,0,0.04);
+    --nme-input-border: rgba(0,0,0,0.1);
+    --nme-accent: #3b82f6;
+    --nme-radius: 16px;
+  }
+}

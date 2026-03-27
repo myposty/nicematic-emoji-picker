@@ -34,7 +34,7 @@ interface CategoryGroup {
       [style.height.px]="height()"
     >
       @if (isSearchMode() && emojis().length === 0) {
-        <div class="flex flex-col items-center justify-center gap-2 text-gray-500" [style.height.px]="height()">
+        <div class="flex flex-col items-center justify-center gap-2" style="color:var(--nme-text-muted);" [style.height.px]="height()">
           <span class="text-4xl">😕</span>
           <span class="text-sm">No se encontraron emojis</span>
         </div>
@@ -53,7 +53,7 @@ interface CategoryGroup {
       } @else {
         @for (group of groups(); track group.category.id) {
           <div [attr.data-cat-id]="group.category.id">
-            <div class="flex items-center px-4 text-[13px] font-bold text-gray-300/90 tracking-wide h-7">
+            <div class="flex items-center px-4 text-[13px] font-bold tracking-wide h-7" style="color:var(--nme-text-muted);">
               {{ group.category.label }}
             </div>
             <div class="flex flex-wrap px-2">

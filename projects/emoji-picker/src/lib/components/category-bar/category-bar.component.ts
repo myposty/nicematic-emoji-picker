@@ -11,7 +11,7 @@ import { CategoryMeta, EmojiCategory } from '../../models/emoji.model';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <nav class="flex items-center h-[46px] border-b border-white/5 bg-[#1a1a28]" style="flex-shrink:0;">
+    <nav class="flex items-center h-[46px]" style="flex-shrink:0;background:var(--nme-nav-bg);border-bottom:1px solid var(--nme-border);">
       @for (cat of categories(); track cat.id) {
         <button
           type="button"
@@ -25,7 +25,7 @@ import { CategoryMeta, EmojiCategory } from '../../models/emoji.model';
         >
           {{ cat.icon }}
           @if (activeCategory() === cat.id) {
-            <span class="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-5 h-[3px] rounded-full bg-blue-500"></span>
+            <span class="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-5 h-[3px] rounded-full" style="background:var(--nme-accent);"></span>
           }
         </button>
       }

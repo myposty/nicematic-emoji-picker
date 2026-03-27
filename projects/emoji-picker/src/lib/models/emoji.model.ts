@@ -47,18 +47,41 @@ export interface CategoryMeta {
   icon: string;
 }
 
-export const CATEGORIES: CategoryMeta[] = [
-  { id: 'recent', label: 'Recientes', icon: '🕐' },
-  { id: 'smileys', label: 'Caritas', icon: '😀' },
-  { id: 'people', label: 'Personas', icon: '👋' },
-  { id: 'animals', label: 'Animales', icon: '🐻' },
-  { id: 'food', label: 'Comida', icon: '🍔' },
-  { id: 'travel', label: 'Viajes', icon: '✈️' },
-  { id: 'activities', label: 'Actividades', icon: '⚽' },
-  { id: 'objects', label: 'Objetos', icon: '💡' },
-  { id: 'symbols', label: 'Símbolos', icon: '💕' },
-  { id: 'flags', label: 'Banderas', icon: '🏁' },
-];
+export type EmojiLocale = 'en' | 'es' | 'pt';
+
+export const CATEGORY_LABELS: Record<EmojiLocale, Record<EmojiCategory, string>> = {
+  en: {
+    recent: 'Recent', smileys: 'Smileys', people: 'People', animals: 'Animals & Nature',
+    food: 'Food & Drink', travel: 'Travel & Places', activities: 'Activities',
+    objects: 'Objects', symbols: 'Symbols', flags: 'Flags',
+  },
+  es: {
+    recent: 'Recientes', smileys: 'Caritas', people: 'Personas', animals: 'Animales',
+    food: 'Comida', travel: 'Viajes', activities: 'Actividades',
+    objects: 'Objetos', symbols: 'Símbolos', flags: 'Banderas',
+  },
+  pt: {
+    recent: 'Recentes', smileys: 'Sorrisos', people: 'Pessoas', animals: 'Animais',
+    food: 'Comida', travel: 'Viagens', activities: 'Atividades',
+    objects: 'Objetos', symbols: 'Símbolos', flags: 'Bandeiras',
+  },
+};
+
+export const CATEGORY_ICONS: Record<EmojiCategory, string> = {
+  recent: '🕐', smileys: '😀', people: '👋', animals: '🐻', food: '🍔',
+  travel: '✈️', activities: '⚽', objects: '💡', symbols: '💕', flags: '🏁',
+};
+
+export function getCategories(locale: EmojiLocale = 'es'): CategoryMeta[] {
+  const labels = CATEGORY_LABELS[locale] || CATEGORY_LABELS['es'];
+  return (Object.keys(CATEGORY_ICONS) as EmojiCategory[]).map(id => ({
+    id,
+    label: labels[id],
+    icon: CATEGORY_ICONS[id],
+  }));
+}
+
+export const CATEGORIES: CategoryMeta[] = getCategories('es');
 
 export interface EmojiPickerConfig {
   /** Number of columns in the grid */

@@ -15,8 +15,8 @@ import { EmojiDataService } from '../../services/emoji-data.service';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="absolute z-50 flex gap-1 p-2 bg-[#2a2a3c] rounded-2xl shadow-2xl border border-white/10 select-none"
-         style="user-select: none; -webkit-user-select: none; -webkit-user-drag: none;"
+    <div class="absolute z-50 flex gap-1 p-2 rounded-2xl shadow-2xl select-none"
+         style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;background:var(--nme-nav-bg);border:1px solid var(--nme-border);"
          (dragstart)="$event.preventDefault()"
          [style.left.px]="x()"
          [style.top.px]="y()">
