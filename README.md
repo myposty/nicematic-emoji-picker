@@ -71,15 +71,6 @@ All inputs are optional. Defaults work out of the box.
 |--------|------|-------------|
 | `emojiSelect` | `Emoji` | Emitted when an emoji is clicked |
 
-## Tailwind v4 Setup
-
-The picker uses Tailwind classes. Add the source path in your `styles.css`:
-
-```css
-@import "tailwindcss";
-@source "../node_modules/@nicematic/emoji-picker/**/*.ts";
-```
-
 ## Emoji Interface
 
 ```typescript
@@ -95,7 +86,6 @@ interface Emoji {
 ## Requirements
 
 - Angular 20+
-- Tailwind CSS v4
 
 ## License
 

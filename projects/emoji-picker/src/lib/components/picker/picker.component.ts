@@ -1,6 +1,7 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  ViewEncapsulation,
   input,
   output,
   computed,
@@ -28,6 +29,8 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
   standalone: true,
   imports: [CategoryBarComponent, SearchBarComponent, EmojiGridComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['../../../styles/nicematic-picker.css'],
   template: `
     <div
       class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none"
