@@ -10,6 +10,7 @@ export { EmojiDataService } from './lib/services/emoji-data.service';
 export { EmojiSearchService } from './lib/services/emoji-search.service';
 export { EmojiRecentsService } from './lib/services/emoji-recents.service';
 export { EmojiSkinToneService } from './lib/services/emoji-skintone.service';
+export { EmojiFlagCacheService } from './lib/services/emoji-flag-cache.service';
 
 // Components
 export { EmojiPickerComponent } from './lib/components/picker/picker.component';

@@ -4,11 +4,14 @@ import {
   input,
   output,
   computed,
+  signal,
   ElementRef,
   OnDestroy,
   OnInit,
+  effect,
 } from '@angular/core';
 import { Emoji } from '../../models/emoji.model';
+import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
 
 @Component({
   selector: 'nicematic-cell',
@@ -27,15 +30,14 @@ import { Emoji } from '../../models/emoji.model';
     '(keydown.space)': 'emojiClick.emit(emoji())',
   },
   template: `
-    @if (isFlag()) {
+    @if (isFlag() && flagDataUrl()) {
       <img
-        [src]="twemojiUrl()"
+        [src]="flagDataUrl()"
         [alt]="emoji().name"
         class="select-none pointer-events-none"
         draggable="false"
         [style.width.px]="size() * 0.62"
         [style.height.px]="size() * 0.62"
-        loading="lazy"
       />
     } @else {
       <span class="select-none leading-none" [style.font-size.px]="size() * 0.62">{{ displayChar() }}</span>
@@ -50,29 +52,44 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
   readonly emojiClick = output<Emoji>();
   readonly emojiLongPress = output<{ emoji: Emoji; rect: DOMRect }>();
 
+  readonly flagDataUrl = signal<string | null>(null);
+
   readonly isFlag = computed(() => {
     const char = this.displayChar();
     const cp = char.codePointAt(0) || 0;
     return cp >= 0x1F1E6 && cp <= 0x1F1FF;
   });
 
-  readonly twemojiUrl = computed(() => {
+  readonly flagCodepoints = computed(() => {
+    if (!this.isFlag()) return '';
     const char = this.displayChar();
-    const codepoints = [...char]
+    return [...char]
       .map(c => c.codePointAt(0)!.toString(16))
       .filter(cp => cp !== 'fe0f')
       .join('-');
-    return `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/${codepoints}.png`;
   });
 
   private longPressTimer: ReturnType<typeof setTimeout> | null = null;
   private didLongPress = false;
 
-  constructor(private elRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private elRef: ElementRef<HTMLElement>,
+    private flagCache: EmojiFlagCacheService,
+  ) {
+    effect(() => {
+      const cp = this.flagCodepoints();
+      if (!cp) return;
+      const cached = this.flagCache.getFlag(cp);
+      if (cached) {
+        this.flagDataUrl.set(cached);
+      } else {
+        this.flagCache.loadFlag(cp).then(url => this.flagDataUrl.set(url));
+      }
+    });
+  }
 
   ngOnInit(): void {
     const el = this.elRef.nativeElement;
-
     el.addEventListener('pointerdown', this.onPointerDown, { passive: true });
     el.addEventListener('pointerup', this.onPointerUp, { passive: true });
     el.addEventListener('pointerleave', this.cancelLongPress, { passive: true });
@@ -86,7 +103,6 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
     el.removeEventListener('pointerdown', this.onPointerDown);
     el.removeEventListener('pointerup', this.onPointerUp);
     el.removeEventListener('pointerleave', this.cancelLongPress);
-    // contextmenu listener is anonymous, no removal needed
   }
 
   private onPointerDown = (): void => {
@@ -117,5 +133,4 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
       this.longPressTimer = null;
     }
   };
-
 }
