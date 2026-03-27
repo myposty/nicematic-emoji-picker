@@ -36,11 +36,12 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
   styleUrls: ['../../../styles/nicematic-picker.css'],
   host: {
     'style': 'display:block;width:100%;box-sizing:border-box;',
+    '(keydown.escape)': 'pickerClose.emit()',
   },
   template: `
     <div
       #pickerContainer
-      class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none"
+      class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none animate-[nicematic-fade-in_0.15s_ease-out]"
       style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;"
       [style.max-width.px]="config().pickerWidth"
       [style.height.px]="config().pickerHeight"
@@ -80,6 +81,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
 })
 export class EmojiPickerComponent implements OnInit, OnDestroy {
   readonly emojiSelect = output<Emoji>();
+  readonly pickerClose = output<void>();
 
   readonly columns = input<number | undefined>(undefined);
   readonly cellSize = input<number | undefined>(undefined);
@@ -102,8 +104,10 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
   readonly skinTones = ['', '🏻', '🏼', '🏽', '🏾', '🏿'] as const;
 
   private resizeObserver: ResizeObserver | null = null;
+  private clickOutsideHandler!: (e: Event) => void;
 
   constructor(
+    private elRef: ElementRef,
     private dataService: EmojiDataService,
     private searchService: EmojiSearchService,
     private recentsService: EmojiRecentsService,
@@ -116,10 +120,18 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
       if (w && w > 0) this.containerWidth.set(w);
     });
     this.resizeObserver.observe(this.containerRef.nativeElement);
+
+    this.clickOutsideHandler = (e: Event) => {
+      if (!this.elRef.nativeElement.contains(e.target)) {
+        this.pickerClose.emit();
+      }
+    };
+    setTimeout(() => document.addEventListener('pointerdown', this.clickOutsideHandler), 100);
   }
 
   ngOnDestroy(): void {
     this.resizeObserver?.disconnect();
+    document.removeEventListener('pointerdown', this.clickOutsideHandler);
   }
 
   readonly effectiveCellSize = computed(() => {

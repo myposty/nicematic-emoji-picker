@@ -25,6 +25,7 @@ import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
     '[style.height.px]': 'size()',
     'role': 'button',
     '[attr.aria-label]': 'emoji().name',
+    '[title]': 'emoji().name',
     'tabindex': '0',
     '(keydown.enter)': 'emojiClick.emit(emoji())',
     '(keydown.space)': 'emojiClick.emit(emoji())',

@@ -4,6 +4,8 @@ import {
   output,
   signal,
   OnDestroy,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -17,13 +19,27 @@ import {
           <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
         </svg>
         <input
+          #searchInput
           type="text"
           placeholder="Buscar emoji"
-          class="w-full pl-10 pr-4 py-2 text-[13px] rounded-full bg-white/5 text-gray-200 border border-white/10 outline-none focus:border-blue-500/50 focus:bg-white/8 placeholder-gray-500 transition-all duration-200"
+          class="w-full pl-10 pr-9 py-2 text-[13px] rounded-full bg-white/5 text-gray-200 border border-white/10 outline-none focus:border-blue-500/50 focus:bg-white/8 placeholder-gray-500 transition-all duration-200"
           [value]="query()"
           (input)="onInput($event)"
+          (keydown.escape)="clear()"
           aria-label="Buscar emoji"
         />
+        @if (query()) {
+          <button
+            type="button"
+            class="absolute right-3 w-4 h-4 flex items-center justify-center text-gray-500 hover:text-gray-300 cursor-pointer transition-colors"
+            (click)="clear()"
+            aria-label="Limpiar búsqueda"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="w-3.5 h-3.5">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        }
       </div>
     </div>
   `,
@@ -31,6 +47,8 @@ import {
 export class SearchBarComponent implements OnDestroy {
   readonly query = signal('');
   readonly searchChange = output<string>();
+
+  @ViewChild('searchInput') inputRef!: ElementRef<HTMLInputElement>;
 
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -42,6 +60,15 @@ export class SearchBarComponent implements OnDestroy {
     this.debounceTimer = setTimeout(() => {
       this.searchChange.emit(value);
     }, 150);
+  }
+
+  clear(): void {
+    this.query.set('');
+    this.searchChange.emit('');
+    if (this.inputRef) {
+      this.inputRef.nativeElement.value = '';
+      this.inputRef.nativeElement.focus();
+    }
   }
 
   ngOnDestroy(): void {
