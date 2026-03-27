@@ -4,11 +4,9 @@ import {
   input,
   output,
   computed,
-  signal,
   ElementRef,
   OnDestroy,
   OnInit,
-  effect,
 } from '@angular/core';
 import { Emoji } from '../../models/emoji.model';
 import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
@@ -21,6 +19,8 @@ import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
     'class': 'inline-flex items-center justify-center cursor-pointer rounded-lg hover:bg-white/10 active:scale-90 transition-all duration-100 select-none outline-none',
     '[style.user-select]': '"none"',
     '[style.-webkit-user-select]': '"none"',
+    '[style.content-visibility]': '"auto"',
+    '[style.contain-intrinsic-size]': 'size() + "px"',
     '[style.width.px]': 'size()',
     '[style.height.px]': 'size()',
     'role': 'button',
@@ -31,12 +31,13 @@ import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
     '(keydown.space)': 'emojiClick.emit(emoji())',
   },
   template: `
-    @if (isFlag() && flagDataUrl()) {
+    @if (isFlag()) {
       <img
-        [src]="flagDataUrl()"
+        [src]="flagUrl()"
         [alt]="emoji().name"
         class="select-none pointer-events-none"
         draggable="false"
+        loading="lazy"
         [style.width.px]="size() * 0.62"
         [style.height.px]="size() * 0.62"
       />
@@ -53,21 +54,20 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
   readonly emojiClick = output<Emoji>();
   readonly emojiLongPress = output<{ emoji: Emoji; rect: DOMRect }>();
 
-  readonly flagDataUrl = signal<string | null>(null);
-
   readonly isFlag = computed(() => {
     const char = this.displayChar();
     const cp = char.codePointAt(0) || 0;
     return cp >= 0x1F1E6 && cp <= 0x1F1FF;
   });
 
-  readonly flagCodepoints = computed(() => {
+  readonly flagUrl = computed(() => {
     if (!this.isFlag()) return '';
     const char = this.displayChar();
-    return [...char]
+    const codepoints = [...char]
       .map(c => c.codePointAt(0)!.toString(16))
       .filter(cp => cp !== 'fe0f')
       .join('-');
+    return this.flagCache.getFlag(codepoints);
   });
 
   private longPressTimer: ReturnType<typeof setTimeout> | null = null;
@@ -76,18 +76,7 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
   constructor(
     private elRef: ElementRef<HTMLElement>,
     private flagCache: EmojiFlagCacheService,
-  ) {
-    effect(() => {
-      const cp = this.flagCodepoints();
-      if (!cp) return;
-      const cached = this.flagCache.getFlag(cp);
-      if (cached) {
-        this.flagDataUrl.set(cached);
-      } else {
-        this.flagCache.loadFlag(cp).then(url => this.flagDataUrl.set(url));
-      }
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     const el = this.elRef.nativeElement;

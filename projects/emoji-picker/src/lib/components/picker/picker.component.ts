@@ -20,6 +20,7 @@ import {
   DEFAULT_CONFIG,
 } from '../../models/emoji.model';
 import { EmojiDataService } from '../../services/emoji-data.service';
+import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
 import { EmojiSearchService } from '../../services/emoji-search.service';
 import { EmojiRecentsService } from '../../services/emoji-recents.service';
 import { EmojiSkinToneService } from '../../services/emoji-skintone.service';
@@ -111,6 +112,7 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
     private dataService: EmojiDataService,
     private searchService: EmojiSearchService,
     private recentsService: EmojiRecentsService,
+    private flagCache: EmojiFlagCacheService,
     public skinToneService: EmojiSkinToneService,
   ) {}
 
@@ -127,6 +129,8 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
       }
     };
     setTimeout(() => document.addEventListener('pointerdown', this.clickOutsideHandler), 100);
+
+    this.flagCache.preloadFlags(this.dataService.allEmojis().map(e => e.char));
   }
 
   ngOnDestroy(): void {

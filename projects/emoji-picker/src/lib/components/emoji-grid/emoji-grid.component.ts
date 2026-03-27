@@ -53,7 +53,7 @@ interface GridRow {
               {{ row.category!.label }}
             </div>
           } @else {
-            <div class="flex" [style.height.px]="cellSize()">
+            <div class="flex" style="content-visibility:auto;" [style.contain-intrinsic-height.px]="cellSize()" [style.height.px]="cellSize()">
               @for (emoji of row.emojis; track emoji.char; let i = $index) {
                 <nicematic-cell
                   [emoji]="emoji"
