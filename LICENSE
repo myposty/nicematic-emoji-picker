@@ -1,0 +1,121 @@
+Nicematic Source Available License v1.0
+
+Copyright (c) 2026 Brahian Riveros (@myposty). All rights reserved.
+
+This license governs use of the accompanying software ("Software"). By
+installing, copying, or otherwise using the Software, you accept the terms
+of this license. If you do not accept them, do not use the Software.
+
+================================================================================
+1. GRANT OF RIGHTS
+================================================================================
+
+Subject to the terms below, the copyright holder grants you a non-exclusive,
+worldwide, royalty-free license to:
+
+  (a) USE the Software in any number of personal, internal, commercial, or
+      educational projects.
+  (b) INTEGRATE the Software into applications, websites, SaaS products, and
+      any other software you develop.
+  (c) MODIFY the Software solely for the purpose of integrating it into your
+      own projects. Such modifications may not be distributed separately.
+
+================================================================================
+2. RESTRICTIONS
+================================================================================
+
+You may NOT:
+
+  (a) FORK, CLONE FOR REDISTRIBUTION, or create derivative works of the
+      Software intended for public distribution, whether modified or
+      unmodified.
+  (b) PUBLISH, UPLOAD, or DISTRIBUTE the Software (or any substantial
+      portion of it) to any package registry (npm, yarn, GitHub Packages,
+      or similar), repository hosting service, or file-sharing platform as
+      a standalone package or library.
+  (c) REBRAND or RENAME the Software and present it as your own work.
+  (d) SUBLICENSE, SELL, or RENT the Software as a standalone product.
+  (e) REMOVE or ALTER any copyright notices, license files, or attribution
+      contained within the Software.
+  (f) USE the Software to create a competing emoji picker library or
+      component that is distributed publicly.
+
+================================================================================
+3. CONTRIBUTIONS
+================================================================================
+
+If you submit a pull request or contribution to the official repository,
+you agree to transfer copyright of that contribution to the copyright holder
+under the same terms of this license.
+
+================================================================================
+4. ATTRIBUTION
+================================================================================
+
+Attribution is appreciated but not required when using the Software in your
+projects. If you choose to provide attribution, the following format is
+suggested:
+
+  "Emoji picker powered by @nicematic/emoji-picker"
+
+================================================================================
+5. DISCLAIMER OF WARRANTIES
+================================================================================
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+
+THE COPYRIGHT HOLDER DOES NOT WARRANT THAT THE SOFTWARE WILL BE
+UNINTERRUPTED, ERROR-FREE, OR FREE OF HARMFUL COMPONENTS.
+
+================================================================================
+6. LIMITATION OF LIABILITY
+================================================================================
+
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+================================================================================
+7. TERMINATION
+================================================================================
+
+This license is effective until terminated. Your rights under this license
+will terminate automatically without notice if you fail to comply with any
+of its terms. Upon termination, you must destroy all copies of the Software
+in your possession.
+
+================================================================================
+8. GOVERNING LAW
+================================================================================
+
+This license shall be governed by and construed in accordance with the laws
+of the jurisdiction in which the copyright holder resides, without regard to
+its conflict of law provisions.
+
+================================================================================
+9. SEVERABILITY
+================================================================================
+
+If any provision of this license is held to be unenforceable or invalid,
+that provision will be enforced to the maximum extent possible, and the
+remaining provisions will remain in full force and effect.
+
+================================================================================
+10. ENTIRE AGREEMENT
+================================================================================
+
+This license constitutes the entire agreement between you and the copyright
+holder regarding the Software and supersedes all prior agreements and
+understandings.
+
+================================================================================
+
+For commercial licensing inquiries, custom agreements, or questions:
+  GitHub: https://github.com/myposty
+  Package: https://www.npmjs.com/package/@nicematic/emoji-picker

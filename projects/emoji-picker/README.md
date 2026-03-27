@@ -134,4 +134,4 @@ All services are `providedIn: 'root'` and can be injected directly:
 
 ## License
 
-MIT
+Nicematic License v1.0 — Free to use, no forks or redistribution allowed. See [LICENSE](LICENSE) for details.
