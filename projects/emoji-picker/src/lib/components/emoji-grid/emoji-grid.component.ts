@@ -16,6 +16,7 @@ import { SkinTonePopoverComponent } from '../skin-tone-popover/skin-tone-popover
 import { EmojiDataService } from '../../services/emoji-data.service';
 
 interface GridRow {
+  id: number;
   type: 'header' | 'emojis';
   category?: CategoryMeta;
   emojis?: Emoji[];
@@ -44,7 +45,7 @@ interface GridRow {
       }
 
       <div class="absolute top-0 left-0 w-full" [style.transform]="'translateY(' + offsetY() + 'px)'">
-        @for (row of visibleRows(); track $index) {
+        @for (row of visibleRows(); track row.id) {
           @if (row.type === 'header') {
             <div
               class="flex items-center px-4 text-[13px] font-bold text-gray-300/90 tracking-wide"
@@ -111,6 +112,8 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
 
   private rafId: number | null = null;
   private scrollHandler!: () => void;
+  private lastVisibleCategory: EmojiCategory | null = null;
+  private lastScrollTop = -1;
 
   constructor(private dataService: EmojiDataService) {}
 
@@ -119,11 +122,13 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
     const cols = this.columns();
     const tone = this.skinTone();
     const rows: GridRow[] = [];
+    let rowId = 0;
 
     if (this.isSearchMode()) {
       for (let i = 0; i < emojis.length; i += cols) {
         const chunk = emojis.slice(i, i + cols);
         rows.push({
+          id: rowId++,
           type: 'emojis',
           emojis: chunk,
           displayChars: chunk.map(e => this.dataService.getEmojiWithSkinTone(e, tone)),
@@ -144,11 +149,12 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
       const catEmojis = grouped.get(cat.id);
       if (!catEmojis?.length) continue;
 
-      rows.push({ type: 'header', category: cat });
+      rows.push({ id: rowId++, type: 'header', category: cat });
 
       for (let i = 0; i < catEmojis.length; i += cols) {
         const chunk = catEmojis.slice(i, i + cols);
         rows.push({
+          id: rowId++,
           type: 'emojis',
           emojis: chunk,
           displayChars: chunk.map(e => this.dataService.getEmojiWithSkinTone(e, tone)),
@@ -211,7 +217,10 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
       if (this.rafId !== null) return;
       this.rafId = requestAnimationFrame(() => {
         this.rafId = null;
-        this.scrollTop.set(el.scrollTop);
+        const st = Math.round(el.scrollTop);
+        if (st === this.lastScrollTop) return;
+        this.lastScrollTop = st;
+        this.scrollTop.set(st);
         this.detectVisibleCategory();
       });
     };
@@ -260,13 +269,16 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
     const rows = this.allRows();
     const st = this.scrollTop();
     let acc = 0;
+    let lastCat: EmojiCategory | null = null;
     for (const row of rows) {
+      if (row.type === 'header' && row.category) lastCat = row.category.id;
       const rh = row.type === 'header' ? this.headerHeight : this.cellSize();
-      if (acc + rh > st && row.type === 'header' && row.category) {
-        this.categoryVisible.emit(row.category.id);
-        return;
-      }
+      if (acc + rh > st) break;
       acc += rh;
+    }
+    if (lastCat && lastCat !== this.lastVisibleCategory) {
+      this.lastVisibleCategory = lastCat;
+      this.categoryVisible.emit(lastCat);
     }
   }
 }
