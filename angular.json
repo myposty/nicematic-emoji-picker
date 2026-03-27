@@ -40,6 +40,7 @@
           "builder": "@angular/build:application",
           "options": {
             "outputPath": { "base": "docs", "browser": "" },
+            "baseHref": "/nicematic-emoji-picker/",
             "browser": "projects/demo/src/main.ts",
             "polyfills": [
               "zone.js"
