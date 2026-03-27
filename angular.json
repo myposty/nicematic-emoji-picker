@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "docs",
+            "outputPath": { "base": "docs", "browser": "" },
             "browser": "projects/demo/src/main.ts",
             "polyfills": [
               "zone.js"
