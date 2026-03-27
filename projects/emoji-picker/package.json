@@ -1,0 +1,27 @@
+{
+  "name": "@nicematic/emoji-picker",
+  "version": "0.0.1",
+  "description": "A high-performance emoji picker for Angular. Zero dependencies. Virtual scroll. Tailwind v4.",
+  "peerDependencies": {
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "angular",
+    "emoji",
+    "picker",
+    "emoji-picker",
+    "virtual-scroll",
+    "tailwind",
+    "signals"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myposty/-nicematic-emoji-picker.git"
+  }
+}
