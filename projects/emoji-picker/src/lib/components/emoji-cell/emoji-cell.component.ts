@@ -72,9 +72,10 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
 
   private longPressTimer: ReturnType<typeof setTimeout> | null = null;
   private didLongPress = false;
+  private didMove = false;
   private startX = 0;
   private startY = 0;
-  private readonly MOVE_THRESHOLD = 10;
+  private readonly MOVE_THRESHOLD = 6;
   private readonly LONG_PRESS_MS = 400;
 
   constructor(
@@ -85,26 +86,24 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const el = this.elRef.nativeElement;
 
-    // Pointer events (desktop + modern mobile)
     if (window.PointerEvent) {
+      // Pointer events (desktop + modern mobile) — sufficient alone
       el.addEventListener('pointerdown', this.onStart, { passive: true });
       el.addEventListener('pointermove', this.onMove, { passive: true });
       el.addEventListener('pointerup', this.onEnd, { passive: true });
       el.addEventListener('pointercancel', this.cancelLongPress, { passive: true });
       el.addEventListener('pointerleave', this.cancelLongPress, { passive: true });
+    } else {
+      // Touch events ONLY as fallback for browsers without PointerEvent
+      el.addEventListener('touchstart', this.onTouchStart, { passive: true });
+      el.addEventListener('touchmove', this.onTouchMove, { passive: true });
+      el.addEventListener('touchend', this.onTouchEnd, { passive: true });
+      el.addEventListener('touchcancel', this.cancelLongPress, { passive: true });
     }
 
-    // Touch events (fallback iOS Safari, old Android)
-    el.addEventListener('touchstart', this.onTouchStart, { passive: false });
-    el.addEventListener('touchmove', this.onTouchMove, { passive: true });
-    el.addEventListener('touchend', this.onTouchEnd, { passive: true });
-    el.addEventListener('touchcancel', this.cancelLongPress, { passive: true });
-
-    // Prevent native long press behaviors
     el.addEventListener('contextmenu', (e: Event) => e.preventDefault());
     el.addEventListener('dragstart', (e: Event) => e.preventDefault());
 
-    // Prevent iOS callout / text selection
     (el.style as any).webkitTouchCallout = 'none';
     (el.style as any).webkitUserSelect = 'none';
     (el.style as any).touchAction = 'manipulation';
@@ -117,14 +116,15 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
   private onStart = (e: PointerEvent): void => {
     this.startX = e.clientX;
     this.startY = e.clientY;
+    this.didMove = false;
     this.startLongPress();
   };
 
   private onMove = (e: PointerEvent): void => {
-    if (!this.longPressTimer) return;
     const dx = Math.abs(e.clientX - this.startX);
     const dy = Math.abs(e.clientY - this.startY);
     if (dx > this.MOVE_THRESHOLD || dy > this.MOVE_THRESHOLD) {
+      this.didMove = true;
       this.cancelLongPress();
     }
   };
@@ -134,28 +134,27 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
       clearTimeout(this.longPressTimer);
       this.longPressTimer = null;
     }
-    if (!this.didLongPress) {
+    if (!this.didLongPress && !this.didMove) {
       this.emojiClick.emit(this.emoji());
     }
     this.didLongPress = false;
+    this.didMove = false;
   };
 
   private onTouchStart = (e: TouchEvent): void => {
-    if (this.emoji().hasSkinTone) {
-      e.preventDefault(); // Prevent iOS magnifying glass / text selection
-    }
     const touch = e.touches[0];
     this.startX = touch.clientX;
     this.startY = touch.clientY;
+    this.didMove = false;
     this.startLongPress();
   };
 
   private onTouchMove = (e: TouchEvent): void => {
-    if (!this.longPressTimer) return;
     const touch = e.touches[0];
     const dx = Math.abs(touch.clientX - this.startX);
     const dy = Math.abs(touch.clientY - this.startY);
     if (dx > this.MOVE_THRESHOLD || dy > this.MOVE_THRESHOLD) {
+      this.didMove = true;
       this.cancelLongPress();
     }
   };
@@ -166,6 +165,7 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
 
   private startLongPress(): void {
     this.didLongPress = false;
+    this.didMove = false;
     if (!this.emoji().hasSkinTone) return;
     this.longPressTimer = setTimeout(() => {
       this.didLongPress = true;
