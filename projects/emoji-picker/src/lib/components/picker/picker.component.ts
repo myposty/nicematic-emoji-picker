@@ -7,6 +7,9 @@ import {
   computed,
   signal,
   ViewChild,
+  ElementRef,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   Emoji,
@@ -33,6 +36,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
   styleUrls: ['../../../styles/nicematic-picker.css'],
   template: `
     <div
+      #pickerContainer
       class="flex flex-col rounded-2xl shadow-2xl bg-[#222230] overflow-hidden select-none w-full"
       style="user-select: none; -webkit-user-select: none; -webkit-user-drag: none;"
       (dragstart)="$event.preventDefault()"
@@ -59,7 +63,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
           [emojis]="displayedEmojis()"
           [categories]="visibleCategories()"
           [skinTone]="skinToneService.currentSkinTone()"
-          [columns]="config().columns"
+          [columns]="effectiveColumns()"
           [cellSize]="config().cellSize"
           [height]="gridHeight()"
           [contentHeight]="contentHeight()"
@@ -71,7 +75,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
     </div>
   `,
 })
-export class EmojiPickerComponent {
+export class EmojiPickerComponent implements OnInit, OnDestroy {
   readonly emojiSelect = output<Emoji>();
 
   readonly columns = input<number | undefined>(undefined);
@@ -85,12 +89,16 @@ export class EmojiPickerComponent {
   readonly pickerHeight = input<number | undefined>(undefined);
   readonly pickerWidth = input<number | undefined>(undefined);
 
+  @ViewChild('pickerContainer', { static: true }) containerRef!: ElementRef<HTMLElement>;
   @ViewChild(EmojiGridComponent) grid!: EmojiGridComponent;
 
   readonly activeCategory = signal<EmojiCategory>('smileys');
   readonly searchQuery = signal('');
+  readonly containerWidth = signal(420);
 
   readonly skinTones = ['', '🏻', '🏼', '🏽', '🏾', '🏿'] as const;
+
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor(
     private dataService: EmojiDataService,
@@ -98,6 +106,26 @@ export class EmojiPickerComponent {
     private recentsService: EmojiRecentsService,
     public skinToneService: EmojiSkinToneService,
   ) {}
+
+  ngOnInit(): void {
+    this.resizeObserver = new ResizeObserver(entries => {
+      const w = entries[0]?.contentRect.width;
+      if (w && w > 0) this.containerWidth.set(w);
+    });
+    this.resizeObserver.observe(this.containerRef.nativeElement);
+  }
+
+  ngOnDestroy(): void {
+    this.resizeObserver?.disconnect();
+  }
+
+  readonly effectiveColumns = computed(() => {
+    if (this.columns() !== undefined) return this.columns()!;
+    const w = this.containerWidth();
+    const cell = this.config().cellSize;
+    const padding = 16;
+    return Math.max(4, Math.floor((w - padding) / cell));
+  });
 
   readonly config = computed<EmojiPickerConfig>(() => ({
     ...DEFAULT_CONFIG,
@@ -155,7 +183,7 @@ export class EmojiPickerComponent {
 
   readonly contentHeight = computed(() => {
     const emojis = this.displayedEmojis();
-    const cols = this.config().columns;
+    const cols = this.effectiveColumns();
     const cellSize = this.config().cellSize;
     const headerHeight = 32;
 
