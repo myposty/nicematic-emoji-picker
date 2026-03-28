@@ -2,7 +2,6 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
-  VERSION,
   input,
   output,
   computed,
@@ -122,15 +121,6 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const major = parseInt(VERSION.major, 10);
-    if (major < 17) {
-      console.error(
-        `[@nicematic/emoji-picker] Angular ${VERSION.full} is not supported. ` +
-        `This standalone component requires Angular 17+. ` +
-        `For Angular 14-16, use: import { EmojiPickerModule } from "@nicematic/emoji-picker/legacy"`
-      );
-    }
-
     if (this.recentsService.recents().length > 0) {
       this.activeCategory.set('recent');
     }

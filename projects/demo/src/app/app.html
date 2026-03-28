@@ -7,7 +7,7 @@
       &#64;nicematic/emoji-picker
     </h1>
     <p class="text-gray-400 mt-2 text-center text-sm sm:text-base max-w-lg">
-      High-performance emoji picker for Angular 14 to 21+. Zero dependencies. 929 emojis. Auto theme. i18n. Responsive.
+      High-performance emoji picker for Angular 17 to 21+. Zero dependencies. 929 emojis. Auto theme. i18n. Responsive.
     </p>
 
     <!-- Install -->
@@ -22,7 +22,7 @@
     <div class="flex gap-3 mt-4 flex-wrap justify-center">
       <img src="https://img.shields.io/npm/v/@nicematic/emoji-picker?color=blue&label=npm" alt="npm" />
       <img src="https://img.shields.io/npm/dt/@nicematic/emoji-picker?color=green&label=downloads" alt="downloads" />
-      <img src="https://img.shields.io/badge/angular-14_to_21+-dd0031" alt="angular" />
+      <img src="https://img.shields.io/badge/angular-17_to_21+-dd0031" alt="angular" />
       <img src="https://img.shields.io/badge/license-Nicematic-blue" alt="license" />
     </div>
   </div>
@@ -34,10 +34,7 @@
       (click)="currentTab.set('playground')">Playground</button>
     <button class="px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer"
       [class]="currentTab() === 'modern' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
-      (click)="currentTab.set('modern')">Angular 17+</button>
-    <button class="px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer"
-      [class]="currentTab() === 'legacy' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
-      (click)="currentTab.set('legacy')">Angular 14-16</button>
+      (click)="currentTab.set('modern')">Usage</button>
   </div>
 
   <!-- Playground Tab -->
@@ -105,31 +102,6 @@
 
       <h3 class="text-sm font-semibold text-gray-400 mb-2">Custom Theme (CSS Variables)</h3>
       <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-purple-400">{{ themeCode }}</code></pre>
-    </section>
-  }
-
-  <!-- Legacy (Angular 14-16) Tab -->
-  @if (currentTab() === 'legacy') {
-    <section class="max-w-2xl mx-auto px-4 pb-12">
-      <div class="bg-gray-900 rounded-2xl p-6 mb-6 border border-gray-800">
-        <div class="flex items-center gap-2 mb-4">
-          <span class="bg-yellow-500/20 text-yellow-400 text-xs px-2 py-0.5 rounded-full font-medium">Legacy</span>
-          <span class="text-gray-500 text-xs">Angular 14.x - 16.x</span>
-        </div>
-        <h3 class="text-lg font-bold mb-1">NgModule Import</h3>
-        <p class="text-gray-400 text-sm mb-4">Uses &#64;Input/&#64;Output decorators, *ngFor/*ngIf, BehaviorSubject. For projects that haven't migrated to Angular 17+.</p>
-        <pre class="bg-gray-950 rounded-xl p-4 text-sm overflow-x-auto border border-gray-800" style="scrollbar-width:none;"><code class="text-yellow-400">{{ legacyCode }}</code></pre>
-      </div>
-
-      <h3 class="text-sm font-semibold text-gray-400 mb-2">All Configuration Options</h3>
-      <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-blue-400">{{ configCode }}</code></pre>
-
-      <h3 class="text-sm font-semibold text-gray-400 mb-2">Custom Theme (CSS Variables)</h3>
-      <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-purple-400">{{ themeCode }}</code></pre>
-
-      <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-sm text-blue-300">
-        <strong>Note:</strong> The legacy module shares the same emoji dataset, CSS, translations and theme variables as the modern version. Same features, same UI — just compatible with older Angular versions.
-      </div>
     </section>
   }
 
