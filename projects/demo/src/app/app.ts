@@ -37,13 +37,13 @@ export class App {
 />`;
 
   themeCode = `nicematic-picker {
-  --nme-bg: #1a1a2e;
-  --nme-nav-bg: #16162a;
-  --nme-text: #e5e7eb;
-  --nme-text-muted: #9ca3af;
-  --nme-accent: #3b82f6;
-  --nme-hover: rgba(255,255,255,0.1);
-  --nme-radius: 16px;
+  --nicematic-picker-bg: #1a1a2e;
+  --nicematic-picker-nav-bg: #16162a;
+  --nicematic-picker-text: #e5e7eb;
+  --nicematic-picker-text-muted: #9ca3af;
+  --nicematic-picker-accent: #3b82f6;
+  --nicematic-picker-hover: rgba(255,255,255,0.1);
+  --nicematic-picker-radius: 16px;
 }`;
 
   onEmojiSelect(emoji: Emoji): void {

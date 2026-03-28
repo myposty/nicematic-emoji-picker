@@ -16,7 +16,7 @@ import { EmojiDataService } from '../../services/emoji-data.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="fixed z-50 flex gap-1 p-2 rounded-2xl shadow-2xl select-none"
-         style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;background:var(--nme-nav-bg);border:1px solid var(--nme-border);"
+         style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;background:var(--nicematic-picker-nav-bg);border:1px solid var(--nicematic-picker-border);"
          (dragstart)="$event.preventDefault()"
          [style.left.px]="x()"
          [style.top.px]="y()">

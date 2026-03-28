@@ -46,7 +46,7 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
     <div
       #pickerContainer
       class="flex flex-col rounded-2xl shadow-2xl overflow-hidden select-none animate-[nicematic-fade-in_0.15s_ease-out]"
-      style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;background:var(--nme-bg,#222230);color:var(--nme-text,#e5e7eb);border-radius:var(--nme-radius,16px);"
+      style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;background:var(--nicematic-picker-bg,#222230);color:var(--nicematic-picker-text,#e5e7eb);border-radius:var(--nicematic-picker-radius,16px);"
       [style.max-width.px]="config().pickerWidth"
       [style.height.px]="config().pickerHeight"
       (dragstart)="$event.preventDefault()"
@@ -162,19 +162,21 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
     return getLocaleStrings((this.config().locale || 'es') as EmojiLocale);
   });
 
-  readonly config = computed<EmojiPickerConfig>(() => ({
+  readonly config = computed<EmojiPickerConfig>(() => {
+    const clamp = (val: number, min: number, max: number) => Math.max(min, Math.min(max, val));
+    return {
     ...DEFAULT_CONFIG,
-    ...(this.columns() !== undefined && { columns: this.columns()! }),
-    ...(this.cellSize() !== undefined && { cellSize: this.cellSize()! }),
-    ...(this.maxRecents() !== undefined && { maxRecents: this.maxRecents()! }),
+    ...(this.columns() !== undefined && { columns: clamp(this.columns()!, 3, 15) }),
+    ...(this.cellSize() !== undefined && { cellSize: clamp(this.cellSize()!, 24, 64) }),
+    ...(this.maxRecents() !== undefined && { maxRecents: clamp(this.maxRecents()!, 0, 100) }),
     ...(this.locale() !== undefined && { locale: this.locale()! }),
     ...(this.showSearch() !== undefined && { showSearch: this.showSearch()! }),
     ...(this.showCategories() !== undefined && { showCategories: this.showCategories()! }),
     ...(this.showSkinTones() !== undefined && { showSkinTones: this.showSkinTones()! }),
     ...(this.includeCategories() !== undefined && { includeCategories: this.includeCategories()! }),
-    ...(this.pickerHeight() !== undefined && { pickerHeight: this.pickerHeight()! }),
-    ...(this.pickerWidth() !== undefined && { pickerWidth: this.pickerWidth()! }),
-  }));
+    ...(this.pickerHeight() !== undefined && { pickerHeight: clamp(this.pickerHeight()!, 200, 800) }),
+    ...(this.pickerWidth() !== undefined && { pickerWidth: clamp(this.pickerWidth()!, 200, 800) }),
+  }});
 
   readonly isSearching = computed(() => this.searchQuery().length > 0);
 

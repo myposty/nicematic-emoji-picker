@@ -16,7 +16,7 @@ import {
   template: `
     <div class="px-3 pt-2.5 pb-1.5">
       <div class="relative flex items-center">
-        <svg class="absolute left-3 w-4 h-4 pointer-events-none" style="color:var(--nme-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <svg class="absolute left-3 w-4 h-4 pointer-events-none" style="color:var(--nicematic-picker-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
         </svg>
         <input
@@ -24,7 +24,7 @@ import {
           type="text"
           [placeholder]="placeholder()"
           class="w-full pl-10 pr-9 py-2 text-[13px] rounded-full outline-none transition-all duration-200"
-          style="background:var(--nme-input-bg);color:var(--nme-text);border:1px solid var(--nme-input-border);"
+          style="background:var(--nicematic-picker-input-bg);color:var(--nicematic-picker-text);border:1px solid var(--nicematic-picker-input-border);"
           [value]="query()"
           (input)="onInput($event)"
           (keydown.escape)="clear()"

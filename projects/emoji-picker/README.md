@@ -67,16 +67,18 @@ All inputs are optional. Defaults work out of the box.
 
 ### Inputs
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `columns` | `number` | `9` | Columns in grid (auto-adapts on mobile) |
-| `cellSize` | `number` | `44` | Emoji cell size in px |
-| `pickerHeight` | `number` | `400` | Picker height in px |
-| `pickerWidth` | `number` | `420` | Picker max width in px |
-| `locale` | `'en' \| 'es' \| 'pt'` | `'es'` | Category label language |
-| `showSearch` | `boolean` | `true` | Show search bar |
-| `showCategories` | `boolean` | `true` | Show category tabs |
-| `maxRecents` | `number` | `50` | Max recent emojis stored |
+| Input | Type | Default | Range | Description |
+|-------|------|---------|-------|-------------|
+| `columns` | `number` | `9` | 3 - 15 | Columns in grid (auto-adapts on mobile) |
+| `cellSize` | `number` | `44` | 24 - 64 | Emoji cell size in px |
+| `pickerHeight` | `number` | `400` | 200 - 800 | Picker height in px |
+| `pickerWidth` | `number` | `420` | 200 - 800 | Picker max width in px |
+| `locale` | `string` | `'es'` | — | Category labels language (en, es, pt, fr, de, it, ja, ko, zh, ru, ar, hi) |
+| `showSearch` | `boolean` | `true` | — | Show search bar |
+| `showCategories` | `boolean` | `true` | — | Show category tabs |
+| `maxRecents` | `number` | `50` | 0 - 100 | Max recent emojis stored |
+
+> Values outside the allowed range are automatically clamped to the nearest limit.
 
 ### Outputs
 
@@ -91,16 +93,16 @@ The picker auto-detects light/dark mode via `prefers-color-scheme`. To customize
 
 ```css
 nicematic-picker {
-  --nme-bg: #1a1a2e;
-  --nme-nav-bg: #16162a;
-  --nme-text: #e5e7eb;
-  --nme-text-muted: #9ca3af;
-  --nme-border: rgba(255,255,255,0.05);
-  --nme-hover: rgba(255,255,255,0.1);
-  --nme-input-bg: rgba(255,255,255,0.05);
-  --nme-input-border: rgba(255,255,255,0.1);
-  --nme-accent: #3b82f6;
-  --nme-radius: 16px;
+  --nicematic-picker-bg: #1a1a2e;
+  --nicematic-picker-nav-bg: #16162a;
+  --nicematic-picker-text: #e5e7eb;
+  --nicematic-picker-text-muted: #9ca3af;
+  --nicematic-picker-border: rgba(255,255,255,0.05);
+  --nicematic-picker-hover: rgba(255,255,255,0.1);
+  --nicematic-picker-input-bg: rgba(255,255,255,0.05);
+  --nicematic-picker-input-border: rgba(255,255,255,0.1);
+  --nicematic-picker-accent: #3b82f6;
+  --nicematic-picker-radius: 16px;
 }
 ```
 

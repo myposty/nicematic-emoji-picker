@@ -16,7 +16,7 @@ import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'class': 'inline-flex items-center justify-center cursor-pointer rounded-lg active:scale-90 transition-all duration-100 select-none outline-none nme-cell',
+    'class': 'inline-flex items-center justify-center cursor-pointer rounded-lg active:scale-90 transition-all duration-100 select-none outline-none nicematic-cell-hover',
     '[style.user-select]': '"none"',
     '[style.-webkit-user-select]': '"none"',
     '[style.content-visibility]': '"auto"',
