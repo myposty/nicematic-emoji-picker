@@ -179,10 +179,10 @@ export class EmojiGridComponent implements OnInit, OnDestroy {
   private detectVisibleCategory(el: HTMLElement): void {
     const headers = el.querySelectorAll('[data-cat-id]');
     let found: EmojiCategory | null = null;
-    const scrollTop = el.scrollTop;
+    const containerTop = el.getBoundingClientRect().top;
     for (const h of Array.from(headers)) {
-      const top = (h as HTMLElement).offsetTop;
-      if (top <= scrollTop + 60) {
+      const headerTop = (h as HTMLElement).getBoundingClientRect().top - containerTop;
+      if (headerTop <= 60) {
         found = (h as HTMLElement).dataset['catId'] as EmojiCategory;
       }
     }
