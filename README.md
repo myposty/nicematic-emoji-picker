@@ -132,7 +132,12 @@ All services are `providedIn: 'root'` and can be injected directly:
 
 ## Requirements
 
-- Angular 17.1+
+- Angular 14+ (legacy via `@nicematic/emoji-picker/legacy`)
+- Angular 17.1+ (standalone via `@nicematic/emoji-picker`)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## License
 
