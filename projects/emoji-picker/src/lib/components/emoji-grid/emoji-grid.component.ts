@@ -39,7 +39,7 @@ interface CategoryGroup {
           <span class="text-sm">{{ noResultsText() }}</span>
         </div>
       } @else if (isSearchMode()) {
-        <div class="flex flex-wrap px-2 py-1">
+        <div class="grid px-1 py-1" [style.grid-template-columns]="'repeat(auto-fill, minmax(' + cellSize() + 'px, 1fr))'">
           @for (emoji of emojis(); track emoji.char) {
             <nicematic-cell
               [emoji]="emoji"
@@ -56,7 +56,7 @@ interface CategoryGroup {
             <div class="flex items-center px-4 text-[13px] font-bold tracking-wide h-7" style="color:var(--nicematic-picker-text-muted);">
               {{ group.category.label }}
             </div>
-            <div class="flex flex-wrap px-2">
+            <div class="grid px-1" [style.grid-template-columns]="'repeat(auto-fill, minmax(' + cellSize() + 'px, 1fr))'">
               @for (emoji of group.emojis; track emoji.char; let i = $index) {
                 <nicematic-cell
                   [emoji]="emoji"

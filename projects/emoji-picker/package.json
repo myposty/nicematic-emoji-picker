@@ -1,6 +1,6 @@
 {
   "name": "@nicematic/emoji-picker",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A high-performance emoji picker for Angular. Zero external dependencies. Native scroll. Auto theme detection.",
   "peerDependencies": {
     "@angular/common": ">=17.1.0",
