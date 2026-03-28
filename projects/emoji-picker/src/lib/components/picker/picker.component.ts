@@ -121,6 +121,10 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    if (this.recentsService.recents().length > 0) {
+      this.activeCategory.set('recent');
+    }
+
     this.resizeObserver = new ResizeObserver(entries => {
       const w = entries[0]?.contentRect.width;
       if (w && w > 0) this.containerWidth.set(w);
