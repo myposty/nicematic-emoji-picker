@@ -130,7 +130,7 @@ All services are `providedIn: 'root'` and can be injected directly:
 
 ## Requirements
 
-- Angular 20+
+- Angular 17.1+
 
 ## License
 
