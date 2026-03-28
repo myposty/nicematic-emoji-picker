@@ -1,148 +1,144 @@
 <div class="min-h-screen bg-gray-950 text-white">
 
   <!-- Hero -->
-  <div class="flex flex-col items-center pt-12 pb-8 px-4">
+  <div class="flex flex-col items-center pt-12 pb-6 px-4">
     <div class="text-5xl mb-4">😀</div>
     <h1 class="text-3xl sm:text-4xl font-extrabold text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
       &#64;nicematic/emoji-picker
     </h1>
     <p class="text-gray-400 mt-2 text-center text-sm sm:text-base max-w-lg">
-      A high-performance emoji picker for Angular. Zero dependencies. 929 emojis. Auto theme. i18n. Responsive.
+      High-performance emoji picker for Angular 14 to 21+. Zero dependencies. 929 emojis. Auto theme. i18n. Responsive.
     </p>
 
     <!-- Install -->
-    <div class="mt-6 flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 max-w-md w-full">
+    <div class="mt-5 flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 max-w-md w-full">
       <code class="flex-1 text-sm text-green-400 overflow-x-auto" style="scrollbar-width:none;">{{ installCmd }}</code>
-      <button
-        class="shrink-0 text-gray-500 hover:text-white transition-colors cursor-pointer text-sm"
-        (click)="copyInstall()"
-      >
+      <button class="shrink-0 text-gray-500 hover:text-white transition-colors cursor-pointer text-sm" (click)="copyText(installCmd)">
         {{ copied() ? '✓' : '📋' }}
       </button>
     </div>
 
-    <!-- npm badge -->
+    <!-- Badges -->
     <div class="flex gap-3 mt-4 flex-wrap justify-center">
-      <img src="https://img.shields.io/npm/v/@nicematic/emoji-picker?color=blue&label=npm" alt="npm version" />
-      <img src="https://img.shields.io/npm/dt/@nicematic/emoji-picker?color=green&label=downloads" alt="total downloads" />
-      <img src="https://img.shields.io/badge/angular-17.1_--_21+-dd0031" alt="angular 17.1 - 21+" />
-      <img src="https://img.shields.io/badge/license-Nicematic-blue" alt="Nicematic license" />
+      <img src="https://img.shields.io/npm/v/@nicematic/emoji-picker?color=blue&label=npm" alt="npm" />
+      <img src="https://img.shields.io/npm/dt/@nicematic/emoji-picker?color=green&label=downloads" alt="downloads" />
+      <img src="https://img.shields.io/badge/angular-14_to_21+-dd0031" alt="angular" />
+      <img src="https://img.shields.io/badge/license-Nicematic-blue" alt="license" />
     </div>
   </div>
 
-  <!-- Interactive Demo -->
-  <section class="max-w-lg mx-auto px-4 pb-10">
-    <h2 class="text-xl font-bold mb-4 text-center">Try it</h2>
+  <!-- Tab Navigation -->
+  <div class="flex justify-center gap-2 px-4 mb-6">
+    <button class="px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer"
+      [class]="currentTab() === 'playground' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
+      (click)="currentTab.set('playground')">Playground</button>
+    <button class="px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer"
+      [class]="currentTab() === 'modern' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
+      (click)="currentTab.set('modern')">Angular 17+</button>
+    <button class="px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer"
+      [class]="currentTab() === 'legacy' ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
+      (click)="currentTab.set('legacy')">Angular 14-16</button>
+  </div>
 
-    <!-- Message bar -->
-    <div class="flex items-center gap-2 mb-4">
-      <div class="flex-1 bg-gray-800 rounded-xl px-4 py-3 text-lg min-h-12 flex items-center flex-wrap gap-0.5 overflow-hidden">
-        {{ message() || 'Click an emoji...' }}
+  <!-- Playground Tab -->
+  @if (currentTab() === 'playground') {
+    <section class="max-w-lg mx-auto px-4 pb-10">
+      <!-- Message bar -->
+      <div class="flex items-center gap-2 mb-4">
+        <div class="flex-1 bg-gray-800 rounded-xl px-4 py-3 text-lg min-h-12 flex items-center flex-wrap gap-0.5 overflow-hidden">
+          {{ message() || 'Click an emoji...' }}
+        </div>
+        @if (message()) {
+          <button class="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-gray-800 hover:bg-red-500/20 text-gray-400 hover:text-red-400 transition-all cursor-pointer"
+            (click)="clearMessage()">✕</button>
+        }
       </div>
-      @if (message()) {
-        <button
-          class="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-gray-800 hover:bg-red-500/20 text-gray-400 hover:text-red-400 transition-all cursor-pointer"
-          (click)="clearMessage()"
-        >
-          ✕
-        </button>
+
+      <!-- Locale toggle -->
+      <div class="flex justify-center flex-wrap gap-1.5 mb-3">
+        @for (loc of locales; track loc) {
+          <button class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer uppercase"
+            [class]="currentLocale() === loc ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
+            (click)="currentLocale.set(loc)">{{ loc }}</button>
+        }
+      </div>
+
+      <!-- Picker -->
+      <nicematic-picker [locale]="currentLocale()" (emojiSelect)="onEmojiSelect($event)" />
+
+      @if (selectedEmoji()) {
+        <div class="text-center text-gray-500 text-sm mt-3">
+          {{ selectedEmoji()!.char }} — {{ selectedEmoji()!.name }}
+        </div>
       }
-    </div>
 
-    <!-- Locale toggle -->
-    <div class="flex justify-center flex-wrap gap-1.5 mb-3">
-      @for (loc of locales; track loc) {
-        <button
-          class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer uppercase"
-          [class]="currentLocale() === loc ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
-          (click)="currentLocale.set(loc)"
-        >{{ loc }}</button>
-      }
-    </div>
+      <!-- Features Grid -->
+      <div class="grid grid-cols-3 gap-2 mt-8">
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🎯</div><div class="text-[10px] text-gray-400 mt-1">929 Emojis</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🔍</div><div class="text-[10px] text-gray-400 mt-1">Bilingual Search</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🎨</div><div class="text-[10px] text-gray-400 mt-1">Skin Tones</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🕐</div><div class="text-[10px] text-gray-400 mt-1">Smart Recents</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🌙</div><div class="text-[10px] text-gray-400 mt-1">Auto Theme</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">📱</div><div class="text-[10px] text-gray-400 mt-1">Responsive</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🌐</div><div class="text-[10px] text-gray-400 mt-1">12 Languages</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">⚡</div><div class="text-[10px] text-gray-400 mt-1">Signals</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🪶</div><div class="text-[10px] text-gray-400 mt-1">Zero Deps</div></div>
+      </div>
+    </section>
+  }
 
-    <!-- Picker -->
-    <nicematic-picker
-      [locale]="currentLocale()"
-      (emojiSelect)="onEmojiSelect($event)"
-    />
+  <!-- Modern (Angular 17+) Tab -->
+  @if (currentTab() === 'modern') {
+    <section class="max-w-2xl mx-auto px-4 pb-12">
+      <div class="bg-gray-900 rounded-2xl p-6 mb-6 border border-gray-800">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="bg-green-500/20 text-green-400 text-xs px-2 py-0.5 rounded-full font-medium">Recommended</span>
+          <span class="text-gray-500 text-xs">Angular 17.1+</span>
+        </div>
+        <h3 class="text-lg font-bold mb-1">Standalone Component</h3>
+        <p class="text-gray-400 text-sm mb-4">Uses Angular Signals, standalone imports, modern control flow. No NgModule needed.</p>
+        <pre class="bg-gray-950 rounded-xl p-4 text-sm overflow-x-auto border border-gray-800" style="scrollbar-width:none;"><code class="text-green-400">{{ modernCode }}</code></pre>
+      </div>
 
-    @if (selectedEmoji()) {
-      <div class="text-center text-gray-500 text-sm mt-3">
-        {{ selectedEmoji()!.char }} — {{ selectedEmoji()!.name }}
-      </div>
-    }
-  </section>
+      <h3 class="text-sm font-semibold text-gray-400 mb-2">All Configuration Options</h3>
+      <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-blue-400">{{ configCode }}</code></pre>
 
-  <!-- Features -->
-  <section class="max-w-2xl mx-auto px-4 pb-12">
-    <h2 class="text-xl font-bold mb-6 text-center">Features</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">🎯</div>
-        <div class="text-xs text-gray-400">929 Emojis</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">🔍</div>
-        <div class="text-xs text-gray-400">Bilingual Search</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">🎨</div>
-        <div class="text-xs text-gray-400">Skin Tones</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">🕐</div>
-        <div class="text-xs text-gray-400">Smart Recents</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">🌙</div>
-        <div class="text-xs text-gray-400">Auto Theme</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">📱</div>
-        <div class="text-xs text-gray-400">Responsive</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">🌐</div>
-        <div class="text-xs text-gray-400">i18n (EN/ES/PT)</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">⚡</div>
-        <div class="text-xs text-gray-400">Angular Signals</div>
-      </div>
-      <div class="bg-gray-900 rounded-xl p-4 text-center">
-        <div class="text-2xl mb-1">🪶</div>
-        <div class="text-xs text-gray-400">Zero Deps</div>
-      </div>
-    </div>
-  </section>
+      <h3 class="text-sm font-semibold text-gray-400 mb-2">Custom Theme (CSS Variables)</h3>
+      <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-purple-400">{{ themeCode }}</code></pre>
+    </section>
+  }
 
-  <!-- Code Examples -->
-  <section class="max-w-2xl mx-auto px-4 pb-12">
-    <h2 class="text-xl font-bold mb-6 text-center">Usage</h2>
+  <!-- Legacy (Angular 14-16) Tab -->
+  @if (currentTab() === 'legacy') {
+    <section class="max-w-2xl mx-auto px-4 pb-12">
+      <div class="bg-gray-900 rounded-2xl p-6 mb-6 border border-gray-800">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="bg-yellow-500/20 text-yellow-400 text-xs px-2 py-0.5 rounded-full font-medium">Legacy</span>
+          <span class="text-gray-500 text-xs">Angular 14.x - 16.x</span>
+        </div>
+        <h3 class="text-lg font-bold mb-1">NgModule Import</h3>
+        <p class="text-gray-400 text-sm mb-4">Uses &#64;Input/&#64;Output decorators, *ngFor/*ngIf, BehaviorSubject. For projects that haven't migrated to Angular 17+.</p>
+        <pre class="bg-gray-950 rounded-xl p-4 text-sm overflow-x-auto border border-gray-800" style="scrollbar-width:none;"><code class="text-yellow-400">{{ legacyCode }}</code></pre>
+      </div>
 
-    <!-- Basic -->
-    <h3 class="text-sm font-semibold text-gray-400 mb-2">Basic</h3>
-    <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-green-400">{{ basicCode }}</code></pre>
+      <h3 class="text-sm font-semibold text-gray-400 mb-2">All Configuration Options</h3>
+      <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-blue-400">{{ configCode }}</code></pre>
 
-    <!-- Configuration -->
-    <h3 class="text-sm font-semibold text-gray-400 mb-2">Configuration</h3>
-    <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-blue-400">{{ configCode }}</code></pre>
+      <h3 class="text-sm font-semibold text-gray-400 mb-2">Custom Theme (CSS Variables)</h3>
+      <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-purple-400">{{ themeCode }}</code></pre>
 
-    <!-- Theming -->
-    <h3 class="text-sm font-semibold text-gray-400 mb-2">Custom Theme (CSS Variables)</h3>
-    <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-purple-400">{{ themeCode }}</code></pre>
-  </section>
+      <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-sm text-blue-300">
+        <strong>Note:</strong> The legacy module shares the same emoji dataset, CSS, translations and theme variables as the modern version. Same features, same UI — just compatible with older Angular versions.
+      </div>
+    </section>
+  }
 
   <!-- Footer -->
   <footer class="text-center py-8 text-gray-600 text-sm border-t border-gray-900">
-    <a href="https://github.com/myposty/nicematic-emoji-picker" class="hover:text-gray-400 transition-colors" target="_blank">
-      GitHub
-    </a>
+    <a href="https://github.com/myposty/nicematic-emoji-picker" class="hover:text-gray-400 transition-colors" target="_blank">GitHub</a>
     <span class="mx-2">·</span>
-    <a href="https://www.npmjs.com/package/@nicematic/emoji-picker" class="hover:text-gray-400 transition-colors" target="_blank">
-      npm
-    </a>
+    <a href="https://www.npmjs.com/package/@nicematic/emoji-picker" class="hover:text-gray-400 transition-colors" target="_blank">npm</a>
     <span class="mx-2">·</span>
-    MIT License
+    Nicematic License
   </footer>
 </div>

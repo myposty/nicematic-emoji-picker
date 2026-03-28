@@ -103,8 +103,8 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
       el.addEventListener('touchcancel', this.cancelLongPress, { passive: true });
     }
 
-    el.addEventListener('contextmenu', (e: Event) => e.preventDefault());
-    el.addEventListener('dragstart', (e: Event) => e.preventDefault());
+    el.addEventListener('contextmenu', this.preventDefault);
+    el.addEventListener('dragstart', this.preventDefault);
 
     (el.style as any).webkitTouchCallout = 'none';
     (el.style as any).webkitUserSelect = 'none';
@@ -113,7 +113,21 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.cancelLongPress();
+    const el = this.elRef.nativeElement;
+    el.removeEventListener('pointerdown', this.onStart);
+    el.removeEventListener('pointermove', this.onMove);
+    el.removeEventListener('pointerup', this.onEnd);
+    el.removeEventListener('pointercancel', this.cancelLongPress);
+    el.removeEventListener('pointerleave', this.cancelLongPress);
+    el.removeEventListener('touchstart', this.onTouchStart);
+    el.removeEventListener('touchmove', this.onTouchMove);
+    el.removeEventListener('touchend', this.onTouchEnd);
+    el.removeEventListener('touchcancel', this.cancelLongPress);
+    el.removeEventListener('contextmenu', this.preventDefault);
+    el.removeEventListener('dragstart', this.preventDefault);
   }
+
+  private preventDefault = (e: Event): void => e.preventDefault();
 
   private onStart = (e: PointerEvent): void => {
     this.startX = e.clientX;

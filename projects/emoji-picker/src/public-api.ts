@@ -5,6 +5,9 @@
 // Models
 export * from './lib/models/emoji.model';
 
+// Data
+export { EMOJI_DATA } from './lib/data/emoji-data';
+
 // Services
 export { EmojiDataService } from './lib/services/emoji-data.service';
 export { EmojiSearchService } from './lib/services/emoji-search.service';
