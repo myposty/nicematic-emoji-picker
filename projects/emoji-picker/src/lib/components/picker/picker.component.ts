@@ -168,7 +168,7 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
     ...DEFAULT_CONFIG,
     ...(this.columns() !== undefined && { columns: clamp(this.columns()!, 3, 15) }),
     ...(this.cellSize() !== undefined && { cellSize: clamp(this.cellSize()!, 24, 64) }),
-    ...(this.maxRecents() !== undefined && { maxRecents: clamp(this.maxRecents()!, 0, 100) }),
+    ...(this.maxRecents() !== undefined && { maxRecents: clamp(this.maxRecents()!, 0, 36) }),
     ...(this.locale() !== undefined && { locale: this.locale()! }),
     ...(this.showSearch() !== undefined && { showSearch: this.showSearch()! }),
     ...(this.showCategories() !== undefined && { showCategories: this.showCategories()! }),

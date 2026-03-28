@@ -152,7 +152,7 @@ export interface EmojiPickerConfig {
 export const DEFAULT_CONFIG: EmojiPickerConfig = {
   columns: 9,
   cellSize: 44,
-  maxRecents: 50,
+  maxRecents: 10,
   locale: 'en',
   showSearch: true,
   showCategories: true,

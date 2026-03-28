@@ -13,7 +13,7 @@ interface RecentEntry {
 }
 
 const STORAGE_KEY = 'nicematic-recents';
-const MAX_RECENTS = 50;
+const MAX_RECENTS = 10;
 const DECAY_HALF_LIFE = 3 * 24 * 60 * 60 * 1000; // 3 days in ms
 
 @Injectable({ providedIn: 'root' })

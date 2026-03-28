@@ -76,7 +76,7 @@ All inputs are optional. Defaults work out of the box.
 | `locale` | `string` | `'es'` | — | Category labels language (en, es, pt, fr, de, it, ja, ko, zh, ru, ar, hi) |
 | `showSearch` | `boolean` | `true` | — | Show search bar |
 | `showCategories` | `boolean` | `true` | — | Show category tabs |
-| `maxRecents` | `number` | `50` | 0 - 100 | Max recent emojis stored |
+| `maxRecents` | `number` | `10` | 0 - 36 | Max recent emojis stored |
 
 > Values outside the allowed range are automatically clamped to the nearest limit.
 
