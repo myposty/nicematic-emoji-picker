@@ -1,0 +1,31 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+
+      - run: npx ng build emoji-picker --configuration production
+
+      - run: rm -f dist/@nicematic/emoji-picker/fesm2022/*.map
+
+      - run: npm publish --provenance --access public
+        working-directory: dist/@nicematic/emoji-picker
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
