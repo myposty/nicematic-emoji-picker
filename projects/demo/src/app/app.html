@@ -64,9 +64,7 @@
       </div>
 
       <!-- Picker -->
-      <div class="flex justify-center">
-        <nicematic-picker [locale]="currentLocale()" (emojiSelect)="onEmojiSelect($event)" />
-      </div>
+      <nicematic-picker [locale]="currentLocale()" (emojiSelect)="onEmojiSelect($event)" />
 
       @if (selectedEmoji()) {
         <div class="text-center text-gray-500 text-sm mt-3">

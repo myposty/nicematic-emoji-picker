@@ -39,14 +39,14 @@ import { EmojiGridComponent } from '../emoji-grid/emoji-grid.component';
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['../../../styles/nicematic-picker.css'],
   host: {
-    'style': 'display:block;width:100%;box-sizing:border-box;',
+    'style': 'display:block;box-sizing:border-box;',
     '(keydown.escape)': 'pickerClose.emit()',
   },
   template: `
     <div
       #pickerContainer
       class="flex flex-col rounded-2xl shadow-2xl overflow-hidden select-none animate-[nicematic-fade-in_0.15s_ease-out]"
-      style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;background:var(--nicematic-picker-bg,#222230);color:var(--nicematic-picker-text,#e5e7eb);border-radius:var(--nicematic-picker-radius,16px);"
+      style="user-select:none;-webkit-user-select:none;-webkit-user-drag:none;box-sizing:border-box;width:100%;margin:0 auto;background:var(--nicematic-picker-bg,#222230);color:var(--nicematic-picker-text,#e5e7eb);border-radius:var(--nicematic-picker-radius,16px);"
       [style.max-width.px]="config().pickerWidth"
       [style.height.px]="config().pickerHeight"
       (dragstart)="$event.preventDefault()"
