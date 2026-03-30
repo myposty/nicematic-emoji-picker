@@ -61,7 +61,9 @@
       </div>
 
       <!-- Picker -->
-      <nicematic-picker [locale]="currentLocale()" (emojiSelect)="onEmojiSelect($event)" />
+      <div class="flex justify-center">
+        <nicematic-picker [locale]="currentLocale()" (emojiSelect)="onEmojiSelect($event)" />
+      </div>
 
       @if (selectedEmoji()) {
         <div class="text-center text-gray-500 text-sm mt-3">
@@ -104,6 +106,16 @@
       <pre class="bg-gray-900 rounded-xl p-4 text-sm overflow-x-auto mb-6 border border-gray-800" style="scrollbar-width:none;"><code class="text-purple-400">{{ themeCode }}</code></pre>
     </section>
   }
+
+  <!-- Star CTA -->
+  <div class="flex justify-center py-8">
+    <a href="https://github.com/myposty/nicematic-emoji-picker" target="_blank"
+       class="flex items-center gap-3 px-5 py-2.5 bg-gray-800 hover:bg-gray-700 border border-gray-700 rounded-xl transition-all cursor-pointer text-sm">
+      <span>⭐</span>
+      <span class="text-gray-300">Star on GitHub</span>
+      <img src="https://img.shields.io/github/stars/myposty/nicematic-emoji-picker?style=flat-square&color=yellow&label=" alt="stars" />
+    </a>
+  </div>
 
   <!-- Footer -->
   <footer class="text-center py-8 text-gray-600 text-sm border-t border-gray-900">
