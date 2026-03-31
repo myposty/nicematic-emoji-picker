@@ -10,6 +10,7 @@ yarn-error.log
 
 # IDEs and editors
 .idea/
+.claude/
 .vscode/
 *.sublime-workspace
 

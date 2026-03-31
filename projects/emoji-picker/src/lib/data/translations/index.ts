@@ -1,53 +1,54 @@
 import { EmojiLocale } from '../../models/emoji.model';
-import { ES_TRANSLATIONS } from './es';
-import { PT_TRANSLATIONS } from './pt';
-import { FR_TRANSLATIONS } from './fr';
-import { DE_TRANSLATIONS } from './de';
-import { IT_TRANSLATIONS } from './it';
-import { RU_TRANSLATIONS } from './ru';
-import { JA_TRANSLATIONS } from './ja';
-import { KO_TRANSLATIONS } from './ko';
-import { ZH_TRANSLATIONS } from './zh';
-import { AR_TRANSLATIONS } from './ar';
-import { HI_TRANSLATIONS } from './hi';
-import { TR_TRANSLATIONS } from './tr';
-import { PL_TRANSLATIONS } from './pl';
-import { NL_TRANSLATIONS } from './nl';
-import { SV_TRANSLATIONS } from './sv';
-import { DA_TRANSLATIONS } from './da';
-import { UK_TRANSLATIONS } from './uk';
-import { TH_TRANSLATIONS } from './th';
-import { VI_TRANSLATIONS } from './vi';
-import { ID_TRANSLATIONS } from './id';
-import { MS_TRANSLATIONS } from './ms';
+import { ES_RAW } from './es';
+import { PT_RAW } from './pt';
+import { FR_RAW } from './fr';
+import { DE_RAW } from './de';
+import { IT_RAW } from './it';
+import { RU_RAW } from './ru';
+import { JA_RAW } from './ja';
+import { KO_RAW } from './ko';
+import { ZH_RAW } from './zh';
+import { AR_RAW } from './ar';
+import { HI_RAW } from './hi';
+import { TR_RAW } from './tr';
+import { PL_RAW } from './pl';
+import { NL_RAW } from './nl';
+import { SV_RAW } from './sv';
+import { DA_RAW } from './da';
+import { UK_RAW } from './uk';
+import { TH_RAW } from './th';
+import { VI_RAW } from './vi';
+import { ID_RAW } from './id';
+import { MS_RAW } from './ms';
 
 export type SearchTranslations = Record<string, string[]>;
 
-const SEARCH_TRANSLATIONS: Partial<Record<EmojiLocale, SearchTranslations>> = {
-  es: ES_TRANSLATIONS,
-  pt: PT_TRANSLATIONS,
-  fr: FR_TRANSLATIONS,
-  de: DE_TRANSLATIONS,
-  it: IT_TRANSLATIONS,
-  ru: RU_TRANSLATIONS,
-  ja: JA_TRANSLATIONS,
-  ko: KO_TRANSLATIONS,
-  zh: ZH_TRANSLATIONS,
-  ar: AR_TRANSLATIONS,
-  hi: HI_TRANSLATIONS,
-  tr: TR_TRANSLATIONS,
-  pl: PL_TRANSLATIONS,
-  nl: NL_TRANSLATIONS,
-  sv: SV_TRANSLATIONS,
-  da: DA_TRANSLATIONS,
-  uk: UK_TRANSLATIONS,
-  th: TH_TRANSLATIONS,
-  vi: VI_TRANSLATIONS,
-  id: ID_TRANSLATIONS,
-  ms: MS_TRANSLATIONS,
+const RAW_DATA: Partial<Record<EmojiLocale, string>> = {
+  es: ES_RAW, pt: PT_RAW, fr: FR_RAW, de: DE_RAW, it: IT_RAW,
+  ru: RU_RAW, ja: JA_RAW, ko: KO_RAW, zh: ZH_RAW, ar: AR_RAW,
+  hi: HI_RAW, tr: TR_RAW, pl: PL_RAW, nl: NL_RAW, sv: SV_RAW,
+  da: DA_RAW, uk: UK_RAW, th: TH_RAW, vi: VI_RAW, id: ID_RAW, ms: MS_RAW,
 };
+
+const cache = new Map<string, SearchTranslations>();
+
+function parse(raw: string): SearchTranslations {
+  const result: SearchTranslations = {};
+  for (const entry of raw.split('|')) {
+    const i = entry.indexOf(':');
+    result[entry.slice(0, i)] = entry.slice(i + 1).split(',');
+  }
+  return result;
+}
 
 export function getSearchTranslations(locale: EmojiLocale): SearchTranslations | undefined {
   if (locale === 'en') return undefined;
-  return SEARCH_TRANSLATIONS[locale];
+  const raw = RAW_DATA[locale];
+  if (!raw) return undefined;
+  let parsed = cache.get(locale);
+  if (!parsed) {
+    parsed = parse(raw);
+    cache.set(locale, parsed);
+  }
+  return parsed;
 }

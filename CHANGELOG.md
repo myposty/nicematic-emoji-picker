@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.3.1 (2026-03-31)
+
+### Optimizations
+- **Compact translations** — search keywords stored as compressed strings, parsed on demand with cache
+- **Package size** — reduced from 293 kB to 247 kB (16% smaller)
+- **FESM bundle** — reduced from 532 kB to 422 kB (21% smaller)
+
 ## 2.3.0 (2026-03-31)
 
 ### Features
