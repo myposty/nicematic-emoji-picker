@@ -4,6 +4,7 @@ import {
   input,
   output,
   computed,
+  signal,
   ElementRef,
   OnDestroy,
   OnInit,
@@ -33,7 +34,7 @@ import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
     '(keydown.space)': 'emojiClick.emit(emoji())',
   },
   template: `
-    @if (isFlag()) {
+    @if (isFlag() && !flagError()) {
       <img
         [src]="flagUrl()"
         [alt]="emoji().name"
@@ -42,6 +43,7 @@ import { EmojiFlagCacheService } from '../../services/emoji-flag-cache.service';
         loading="lazy"
         [style.width.px]="size() * 0.62"
         [style.height.px]="size() * 0.62"
+        (error)="flagError.set(true)"
       />
     } @else {
       <span class="select-none leading-none" [style.font-size.px]="size() * 0.62">{{ displayChar() }}</span>
@@ -55,6 +57,7 @@ export class EmojiCellComponent implements OnInit, OnDestroy {
 
   readonly emojiClick = output<Emoji>();
   readonly emojiLongPress = output<{ emoji: Emoji; rect: DOMRect }>();
+  readonly flagError = signal(false);
 
   readonly isFlag = computed(() => {
     const char = this.displayChar();

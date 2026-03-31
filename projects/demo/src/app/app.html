@@ -56,10 +56,13 @@
 
       <!-- Locale toggle -->
       <div class="flex justify-center flex-wrap gap-1.5 mb-3">
-        @for (loc of locales; track loc) {
-          <button class="px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer uppercase"
-            [class]="currentLocale() === loc ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-400 hover:text-white'"
-            (click)="currentLocale.set(loc)">{{ loc }}</button>
+        @for (loc of locales; track loc.code) {
+          <button class="w-9 h-9 rounded-lg transition-all cursor-pointer flex items-center justify-center"
+            [class]="currentLocale() === loc.code ? 'bg-blue-500/20 ring-2 ring-blue-500 scale-110' : 'bg-gray-800 hover:bg-gray-700'"
+            [title]="loc.code.toUpperCase()"
+            (click)="currentLocale.set(loc.code)">
+            <img [src]="flagUrl(loc.img)" [alt]="loc.code" class="w-5 h-5 select-none pointer-events-none" draggable="false" />
+          </button>
         }
       </div>
 
@@ -80,7 +83,7 @@
         <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🕐</div><div class="text-[10px] text-gray-400 mt-1">Smart Recents</div></div>
         <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🌙</div><div class="text-[10px] text-gray-400 mt-1">Auto Theme</div></div>
         <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">📱</div><div class="text-[10px] text-gray-400 mt-1">Responsive</div></div>
-        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🌐</div><div class="text-[10px] text-gray-400 mt-1">12 Languages</div></div>
+        <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🌐</div><div class="text-[10px] text-gray-400 mt-1">22 Languages</div></div>
         <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">⚡</div><div class="text-[10px] text-gray-400 mt-1">Signals</div></div>
         <div class="bg-gray-900 rounded-xl p-3 text-center"><div class="text-xl">🪶</div><div class="text-[10px] text-gray-400 mt-1">Zero Deps</div></div>
       </div>

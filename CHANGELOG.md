@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.3.0 (2026-03-31)
+
+### Features
+- **22 languages** — locale-aware search with native keywords for ES, EN, PT, FR, DE, IT, JA, KO, ZH, RU, AR, HI, TR, PL, NL, SV, DA, UK, TH, VI, ID, MS
+- **965 emojis** — Unicode 16.0 and 17.0 emojis integrated into correct categories
+- **Search service refactor** — reactive locale signal, index auto-rebuilds on language change
+- **Improved i18n** — complete category labels with compound names (e.g. "Animals & Nature") in all languages
+- **Demo** — flag-based locale selector using Twemoji images
+
 ## 2.0.0 (2026-03-28)
 
 ### Features

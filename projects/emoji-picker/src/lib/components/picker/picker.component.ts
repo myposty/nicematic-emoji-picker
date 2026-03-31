@@ -6,6 +6,7 @@ import {
   output,
   computed,
   signal,
+  effect,
   ViewChild,
   ElementRef,
   OnInit,
@@ -118,7 +119,11 @@ export class EmojiPickerComponent implements OnInit, OnDestroy {
     private recentsService: EmojiRecentsService,
     private flagCache: EmojiFlagCacheService,
     public skinToneService: EmojiSkinToneService,
-  ) {}
+  ) {
+    effect(() => {
+      this.searchService.locale.set((this.config().locale || 'en') as EmojiLocale);
+    });
+  }
 
   ngOnInit(): void {
     if (this.recentsService.recents().length > 0) {

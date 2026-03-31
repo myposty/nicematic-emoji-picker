@@ -105,6 +105,8 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '👽', name: 'alien', keywords: ['ufo','space'], category: 'smileys', hasSkinTone: false },
   { char: '👾', name: 'space invader', keywords: ['alien','game'], category: 'smileys', hasSkinTone: false },
   { char: '🤖', name: 'robot', keywords: ['bot','machine'], category: 'smileys', hasSkinTone: false },
+  { char: '🫩', name: 'face with bags under eyes', keywords: ['tired','exhausted','sleepy','bags','cansado'], category: 'smileys', hasSkinTone: false },
+  { char: '🫪', name: 'distorted face', keywords: ['distorted','weird','strange','woozy','distorsionado'], category: 'smileys', hasSkinTone: false },
   { char: '😺', name: 'smiling cat', keywords: ['cat','happy'], category: 'smileys', hasSkinTone: false },
   { char: '😸', name: 'grinning cat', keywords: ['cat','happy'], category: 'smileys', hasSkinTone: false },
   { char: '😹', name: 'joy cat', keywords: ['cat','laugh'], category: 'smileys', hasSkinTone: false },
@@ -403,6 +405,14 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '💐', name: 'bouquet', keywords: ['bouquet','flowers','gift'], category: 'animals', hasSkinTone: false },
   { char: '🍄‍🟫', name: 'brown mushroom', keywords: ['mushroom','fungi'], category: 'animals', hasSkinTone: false },
   { char: '🪷', name: 'lotus', keywords: ['lotus','flower','zen','meditation'], category: 'animals', hasSkinTone: false },
+  { char: '🪽', name: 'wing', keywords: ['wing','angel','fly','bird','ala'], category: 'animals', hasSkinTone: false },
+  { char: '🪺', name: 'nest with eggs', keywords: ['nest','eggs','bird','nature','nido'], category: 'animals', hasSkinTone: false },
+  { char: '🪹', name: 'empty nest', keywords: ['nest','empty','bird','nido'], category: 'animals', hasSkinTone: false },
+  { char: '🫈', name: 'hairy creature', keywords: ['yeti','bigfoot','sasquatch','hairy','monster'], category: 'animals', hasSkinTone: false },
+  { char: '🫍', name: 'orca', keywords: ['orca','whale','killer whale','ocean'], category: 'animals', hasSkinTone: false },
+  { char: '🪾', name: 'leafless tree', keywords: ['tree','leafless','winter','dead','bare'], category: 'animals', hasSkinTone: false },
+  { char: '🪨', name: 'rock', keywords: ['rock','stone','boulder','roca','piedra'], category: 'animals', hasSkinTone: false },
+  { char: '🪵', name: 'wood', keywords: ['wood','log','timber','madera','tronco'], category: 'animals', hasSkinTone: false },
 
   // === FOOD ===
   { char: '🍎', name: 'red apple', keywords: ['apple','fruit'], category: 'food', hasSkinTone: false },
@@ -512,6 +522,8 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '🧉', name: 'mate', keywords: ['mate','yerba','argentina'], category: 'food', hasSkinTone: false },
   { char: '🥤', name: 'cup straw', keywords: ['soda','drink','straw'], category: 'food', hasSkinTone: false },
   { char: '🍶', name: 'sake', keywords: ['sake','japanese','rice wine'], category: 'food', hasSkinTone: false },
+  { char: '🫜', name: 'root vegetable', keywords: ['root','vegetable','turnip','radish'], category: 'food', hasSkinTone: false },
+  { char: '🫖', name: 'teapot', keywords: ['tea','teapot','drink','hot','tetera'], category: 'food', hasSkinTone: false },
 
   // === TRAVEL ===
   { char: '🚗', name: 'car', keywords: ['car','drive'], category: 'travel', hasSkinTone: false },
@@ -575,6 +587,9 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '🔥', name: 'fire', keywords: ['fire','hot','lit'], category: 'travel', hasSkinTone: false },
   { char: '💧', name: 'droplet', keywords: ['water','rain'], category: 'travel', hasSkinTone: false },
   { char: '🌊', name: 'wave', keywords: ['ocean','wave','sea'], category: 'travel', hasSkinTone: false },
+  { char: '🛗', name: 'elevator', keywords: ['elevator','lift','building','ascensor'], category: 'travel', hasSkinTone: false },
+  { char: '🛞', name: 'wheel', keywords: ['wheel','tire','car','roll','rueda'], category: 'travel', hasSkinTone: false },
+  { char: '🛟', name: 'ring buoy', keywords: ['life ring','buoy','rescue','swim','salvavidas'], category: 'travel', hasSkinTone: false },
 
   // === ACTIVITIES ===
   { char: '⚽', name: 'soccer', keywords: ['soccer','football'], category: 'activities', hasSkinTone: false },
@@ -648,6 +663,7 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '🎆', name: 'fireworks', keywords: ['fireworks','celebrate'], category: 'activities', hasSkinTone: false },
   { char: '🎇', name: 'sparkler', keywords: ['sparkler','firework'], category: 'activities', hasSkinTone: false },
   { char: '✨', name: 'sparkles', keywords: ['sparkle','shine','magic'], category: 'activities', hasSkinTone: false },
+  { char: '🪉', name: 'harp', keywords: ['harp','music','instrument','angel','arpa'], category: 'activities', hasSkinTone: false },
 
   // === OBJECTS ===
   { char: '⌚', name: 'watch', keywords: ['watch','time'], category: 'objects', hasSkinTone: false },
@@ -720,6 +736,22 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '🎒', name: 'backpack', keywords: ['backpack','school'], category: 'objects', hasSkinTone: false },
   { char: '💍', name: 'ring', keywords: ['ring','wedding','engaged'], category: 'objects', hasSkinTone: false },
   { char: '💄', name: 'lipstick', keywords: ['lipstick','makeup'], category: 'objects', hasSkinTone: false },
+  { char: '🪏', name: 'shovel', keywords: ['shovel','dig','garden','tool','pala'], category: 'objects', hasSkinTone: false },
+  { char: '🪮', name: 'hair pick', keywords: ['hair','pick','comb','afro'], category: 'objects', hasSkinTone: false },
+  { char: '🛜', name: 'wireless', keywords: ['wifi','wireless','internet','signal'], category: 'objects', hasSkinTone: false },
+  { char: '🪭', name: 'folding hand fan', keywords: ['fan','hand','cool','hot','abanico'], category: 'objects', hasSkinTone: false },
+  { char: '🫧', name: 'bubbles', keywords: ['bubbles','soap','clean','bath','burbujas'], category: 'objects', hasSkinTone: false },
+  { char: '🩻', name: 'x-ray', keywords: ['xray','skeleton','medical','bones','radiografia'], category: 'objects', hasSkinTone: false },
+  { char: '🩼', name: 'crutch', keywords: ['crutch','injured','medical','walk','muleta'], category: 'objects', hasSkinTone: false },
+  { char: '🪫', name: 'low battery', keywords: ['battery','low','dead','charge','bateria'], category: 'objects', hasSkinTone: false },
+  { char: '🪪', name: 'identification card', keywords: ['id','card','identity','license','cedula'], category: 'objects', hasSkinTone: false },
+  { char: '🪩', name: 'mirror ball', keywords: ['disco','ball','party','dance','bola'], category: 'objects', hasSkinTone: false },
+  { char: '🩴', name: 'thong sandal', keywords: ['sandal','flip flop','beach','summer','sandalia'], category: 'objects', hasSkinTone: false },
+  { char: '🪤', name: 'mouse trap', keywords: ['trap','mouse','cheese','trampa'], category: 'objects', hasSkinTone: false },
+  { char: '🪣', name: 'bucket', keywords: ['bucket','pail','water','balde'], category: 'objects', hasSkinTone: false },
+  { char: '🪥', name: 'toothbrush', keywords: ['toothbrush','teeth','dental','hygiene','cepillo'], category: 'objects', hasSkinTone: false },
+  { char: '🪦', name: 'headstone', keywords: ['grave','headstone','rip','death','tumba'], category: 'objects', hasSkinTone: false },
+  { char: '🪧', name: 'placard', keywords: ['sign','placard','protest','message','cartel'], category: 'objects', hasSkinTone: false },
 
   // === SYMBOLS ===
   { char: '❤️', name: 'red heart', keywords: ['heart','love','red'], category: 'symbols', hasSkinTone: false },
@@ -839,6 +871,10 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '🚻', name: 'restroom', keywords: ['restroom','bathroom','wc'], category: 'symbols', hasSkinTone: false },
   { char: '♿', name: 'wheelchair', keywords: ['wheelchair','disability','accessible'], category: 'symbols', hasSkinTone: false },
   { char: '🅿️', name: 'parking', keywords: ['parking','car','p'], category: 'symbols', hasSkinTone: false },
+  { char: '🫆', name: 'fingerprint', keywords: ['fingerprint','identity','touch','security','huella'], category: 'symbols', hasSkinTone: false },
+  { char: '🫟', name: 'splatter', keywords: ['splatter','paint','mess','splash','mancha'], category: 'symbols', hasSkinTone: false },
+  { char: '🫯', name: 'fight cloud', keywords: ['fight','cloud','brawl','dust','pelea'], category: 'symbols', hasSkinTone: false },
+  { char: '🪬', name: 'hamsa', keywords: ['hamsa','hand','protection','luck'], category: 'symbols', hasSkinTone: false },
 
   // === FLAGS ===
   { char: '🇦🇷', name: 'argentina', keywords: ['argentina','flag'], category: 'flags', hasSkinTone: false },
@@ -957,48 +993,4 @@ export const EMOJI_DATA: Emoji[] = [
   { char: '🇸🇳', name: 'senegal', keywords: ['senegal','flag'], category: 'flags', hasSkinTone: false },
   { char: '🇹🇹', name: 'trinidad', keywords: ['trinidad','tobago','flag'], category: 'flags', hasSkinTone: false },
   { char: '🇭🇹', name: 'haiti', keywords: ['haiti','flag'], category: 'flags', hasSkinTone: false },
-
-  // === UNICODE 16.0 (2024) — 8 official new emojis ===
-  { char: '🫩', name: 'face with bags under eyes', keywords: ['tired','exhausted','sleepy','bags','cansado'], category: 'smileys', hasSkinTone: false },
-  { char: '🫆', name: 'fingerprint', keywords: ['fingerprint','identity','touch','security','huella'], category: 'symbols', hasSkinTone: false },
-  { char: '🪾', name: 'leafless tree', keywords: ['tree','leafless','winter','dead','bare'], category: 'animals', hasSkinTone: false },
-  { char: '🫜', name: 'root vegetable', keywords: ['root','vegetable','turnip','radish'], category: 'food', hasSkinTone: false },
-  { char: '🪉', name: 'harp', keywords: ['harp','music','instrument','angel','arpa'], category: 'activities', hasSkinTone: false },
-  { char: '🪏', name: 'shovel', keywords: ['shovel','dig','garden','tool','pala'], category: 'objects', hasSkinTone: false },
-  { char: '🫟', name: 'splatter', keywords: ['splatter','paint','mess','splash','mancha'], category: 'symbols', hasSkinTone: false },
-  { char: '🇨🇶', name: 'flag sark', keywords: ['sark','flag','channel islands'], category: 'flags', hasSkinTone: false },
-
-  // === UNICODE 17.0 (2025) — new emojis ===
-  { char: '🫪', name: 'distorted face', keywords: ['distorted','weird','strange','woozy','distorsionado'], category: 'smileys', hasSkinTone: false },
-  { char: '🫯', name: 'fight cloud', keywords: ['fight','cloud','brawl','dust','pelea'], category: 'symbols', hasSkinTone: false },
-  { char: '🫈', name: 'hairy creature', keywords: ['yeti','bigfoot','sasquatch','hairy','monster'], category: 'animals', hasSkinTone: false },
-  { char: '🧑‍🩰', name: 'ballet dancer', keywords: ['ballet','dance','dancer','tutu','bailarina'], category: 'people', hasSkinTone: true },
-  { char: '🫍', name: 'orca', keywords: ['orca','whale','killer whale','ocean'], category: 'animals', hasSkinTone: false },
-
-  // === EXTRA (Unicode 14-15.1 missing from original dataset) ===
-  { char: '🪮', name: 'hair pick', keywords: ['hair','pick','comb','afro'], category: 'objects', hasSkinTone: false },
-  { char: '🪽', name: 'wing', keywords: ['wing','angel','fly','bird','ala'], category: 'animals', hasSkinTone: false },
-  { char: '🛜', name: 'wireless', keywords: ['wifi','wireless','internet','signal'], category: 'objects', hasSkinTone: false },
-  { char: '🪭', name: 'folding hand fan', keywords: ['fan','hand','cool','hot','abanico'], category: 'objects', hasSkinTone: false },
-  { char: '🪬', name: 'hamsa', keywords: ['hamsa','hand','protection','luck'], category: 'symbols', hasSkinTone: false },
-  { char: '🫧', name: 'bubbles', keywords: ['bubbles','soap','clean','bath','burbujas'], category: 'objects', hasSkinTone: false },
-  { char: '🪺', name: 'nest with eggs', keywords: ['nest','eggs','bird','nature','nido'], category: 'animals', hasSkinTone: false },
-  { char: '🪹', name: 'empty nest', keywords: ['nest','empty','bird','nido'], category: 'animals', hasSkinTone: false },
-  { char: '🫖', name: 'teapot', keywords: ['tea','teapot','drink','hot','tetera'], category: 'food', hasSkinTone: false },
-  { char: '🩻', name: 'x-ray', keywords: ['xray','skeleton','medical','bones','radiografia'], category: 'objects', hasSkinTone: false },
-  { char: '🩼', name: 'crutch', keywords: ['crutch','injured','medical','walk','muleta'], category: 'objects', hasSkinTone: false },
-  { char: '🪫', name: 'low battery', keywords: ['battery','low','dead','charge','bateria'], category: 'objects', hasSkinTone: false },
-  { char: '🪪', name: 'identification card', keywords: ['id','card','identity','license','cedula'], category: 'objects', hasSkinTone: false },
-  { char: '🪩', name: 'mirror ball', keywords: ['disco','ball','party','dance','bola'], category: 'objects', hasSkinTone: false },
-  { char: '🛗', name: 'elevator', keywords: ['elevator','lift','building','ascensor'], category: 'travel', hasSkinTone: false },
-  { char: '🛞', name: 'wheel', keywords: ['wheel','tire','car','roll','rueda'], category: 'travel', hasSkinTone: false },
-  { char: '🛟', name: 'ring buoy', keywords: ['life ring','buoy','rescue','swim','salvavidas'], category: 'travel', hasSkinTone: false },
-  { char: '🩴', name: 'thong sandal', keywords: ['sandal','flip flop','beach','summer','sandalia'], category: 'objects', hasSkinTone: false },
-  { char: '🪤', name: 'mouse trap', keywords: ['trap','mouse','cheese','trampa'], category: 'objects', hasSkinTone: false },
-  { char: '🪣', name: 'bucket', keywords: ['bucket','pail','water','balde'], category: 'objects', hasSkinTone: false },
-  { char: '🪥', name: 'toothbrush', keywords: ['toothbrush','teeth','dental','hygiene','cepillo'], category: 'objects', hasSkinTone: false },
-  { char: '🪦', name: 'headstone', keywords: ['grave','headstone','rip','death','tumba'], category: 'objects', hasSkinTone: false },
-  { char: '🪧', name: 'placard', keywords: ['sign','placard','protest','message','cartel'], category: 'objects', hasSkinTone: false },
-  { char: '🪨', name: 'rock', keywords: ['rock','stone','boulder','roca','piedra'], category: 'animals', hasSkinTone: false },
-  { char: '🪵', name: 'wood', keywords: ['wood','log','timber','madera','tronco'], category: 'animals', hasSkinTone: false },
 ];

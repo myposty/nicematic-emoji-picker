@@ -13,7 +13,34 @@ export class App {
   currentLocale = signal<string>('es');
   currentTab = signal<'playground' | 'modern' | 'legacy'>('playground');
   copied = signal(false);
-  locales = ['es','en','pt','fr','de','it','ja','ko','zh','ru','ar','hi'];
+  locales: { code: string; flag: string; img: string }[] = [
+    { code: 'es', flag: '🇪🇸', img: '1f1ea-1f1f8' },
+    { code: 'en', flag: '🇬🇧', img: '1f1ec-1f1e7' },
+    { code: 'pt', flag: '🇧🇷', img: '1f1e7-1f1f7' },
+    { code: 'fr', flag: '🇫🇷', img: '1f1eb-1f1f7' },
+    { code: 'de', flag: '🇩🇪', img: '1f1e9-1f1ea' },
+    { code: 'it', flag: '🇮🇹', img: '1f1ee-1f1f9' },
+    { code: 'ja', flag: '🇯🇵', img: '1f1ef-1f1f5' },
+    { code: 'ko', flag: '🇰🇷', img: '1f1f0-1f1f7' },
+    { code: 'zh', flag: '🇨🇳', img: '1f1e8-1f1f3' },
+    { code: 'ru', flag: '🇷🇺', img: '1f1f7-1f1fa' },
+    { code: 'ar', flag: '🇸🇦', img: '1f1f8-1f1e6' },
+    { code: 'hi', flag: '🇮🇳', img: '1f1ee-1f1f3' },
+    { code: 'tr', flag: '🇹🇷', img: '1f1f9-1f1f7' },
+    { code: 'pl', flag: '🇵🇱', img: '1f1f5-1f1f1' },
+    { code: 'nl', flag: '🇳🇱', img: '1f1f3-1f1f1' },
+    { code: 'sv', flag: '🇸🇪', img: '1f1f8-1f1ea' },
+    { code: 'da', flag: '🇩🇰', img: '1f1e9-1f1f0' },
+    { code: 'uk', flag: '🇺🇦', img: '1f1fa-1f1e6' },
+    { code: 'th', flag: '🇹🇭', img: '1f1f9-1f1ed' },
+    { code: 'vi', flag: '🇻🇳', img: '1f1fb-1f1f3' },
+    { code: 'id', flag: '🇮🇩', img: '1f1ee-1f1e9' },
+    { code: 'ms', flag: '🇲🇾', img: '1f1f2-1f1fe' },
+  ];
+
+  flagUrl(codepoints: string): string {
+    return `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/${codepoints}.png`;
+  }
 
   installCmd = 'npm install @nicematic/emoji-picker';
 

@@ -6,8 +6,8 @@ A high-performance emoji picker for Angular. Zero external dependencies. Native 
 
 ## Features
 
-- **929 emojis** across 9 categories (smileys, people, animals, food, travel, activities, objects, symbols, flags)
-- **Bilingual search** — English and Spanish keywords built-in
+- **965 emojis** across 9 categories including Unicode 16.0 and 17.0
+- **22 languages** — locale-aware search with native keywords (ES, EN, PT, FR, DE, IT, JA, KO, ZH, RU, AR, HI, TR, PL, NL, SV, DA, UK, TH, VI, ID, MS)
 - **Skin tone variants** — long press to choose skin tone
 - **Smart recents** — frequency-weighted recency algorithm (like WhatsApp)
 - **Flag rendering** — Twemoji fallback for country flags on Windows
@@ -15,7 +15,7 @@ A high-performance emoji picker for Angular. Zero external dependencies. Native 
 - **Angular Signals** — fully reactive with `signal()`, `computed()`, OnPush
 - **Standalone component** — tree-shakable, no NgModule needed
 - **Auto theme** — detects `prefers-color-scheme` automatically (light/dark)
-- **i18n** — category labels in English, Spanish and Portuguese
+- **i18n** — category labels and search keywords in 22 languages
 - **Responsive** — adapts columns dynamically to container width
 - **CSS Variables** — fully customizable colors
 - **Styles included** — Tailwind CSS precompiled inside the library, zero config needed
@@ -73,7 +73,7 @@ All inputs are optional. Defaults work out of the box.
 | `cellSize` | `number` | `44` | 24 - 64 | Emoji cell size in px |
 | `pickerHeight` | `number` | `400` | 200 - 800 | Picker height in px |
 | `pickerWidth` | `number` | `420` | 200 - 800 | Picker max width in px |
-| `locale` | `string` | `'es'` | — | Category labels language (en, es, pt, fr, de, it, ja, ko, zh, ru, ar, hi) |
+| `locale` | `string` | `'en'` | — | UI labels and search language (en, es, pt, fr, de, it, ja, ko, zh, ru, ar, hi, tr, pl, nl, sv, da, uk, th, vi, id, ms) |
 | `showSearch` | `boolean` | `true` | — | Show search bar |
 | `showCategories` | `boolean` | `true` | — | Show category tabs |
 | `maxRecents` | `number` | `10` | 0 - 36 | Max recent emojis stored |
